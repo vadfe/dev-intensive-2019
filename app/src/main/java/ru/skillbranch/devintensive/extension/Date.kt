@@ -105,24 +105,24 @@ fun Date.humanizeDiff(date:Date? = this):String{
         strdif = when(dif){
             in 0..1 -> "только что"
             in 1..45 -> "несколько секунд назад"
-            in 46..75 -> "минуту назад"
-            in 76..2700 -> "$dif_min ${convert_str_min(dif_min)} назад"
-            in 2701..4500 -> "час назад"
-            in 4501..79200 -> "$dif_hor ${convert_str_hor(dif_hor)} назад"
-            in 79201..93600 -> "день назад"
-            in 93601..31104000 -> "$dif_day ${convert_str_day(dif_day)} назад"
+            in 45..75 -> "минуту назад"
+            in 75..2700 -> "$dif_min ${convert_str_min(dif_min)} назад"
+            in 2700..4500 -> "час назад"
+            in 4500..79200 -> "$dif_hor ${convert_str_hor(dif_hor)} назад"
+            in 79200..93600 -> "день назад"
+            in 93600..31104000 -> "$dif_day ${convert_str_day(dif_day)} назад"
             else -> "более года назад"
         }
     else{
         strdif = when(abs(dif)){
             in 0..1 -> "только что"
-            in 2..45 -> "через несколько секунд"
-            in 46..75 -> "через минуту"
-            in 76..2700 -> "через $dif_min ${convert_str_min(dif_min)}"
-            in 2701..4500 -> "через час"
-            in 4501..79200 -> "через $dif_hor ${convert_str_hor(dif_hor)}"
-            in 79201..93600 -> "через день"
-            in 93601..31104000 -> "через $dif_day ${convert_str_day(dif_day)}"
+            in 1..45 -> "через несколько секунд"
+            in 45..75 -> "через минуту"
+            in 75..2700 -> "через $dif_min ${convert_str_min(dif_min)}"
+            in 2700..4500 -> "через час"
+            in 4500..79200 -> "через $dif_hor ${convert_str_hor(dif_hor)}"
+            in 79200..93600 -> "через день"
+            in 93600..31104000 -> "через $dif_day ${convert_str_day(dif_day)}"
             else -> "более чем через год"
         }
     }
