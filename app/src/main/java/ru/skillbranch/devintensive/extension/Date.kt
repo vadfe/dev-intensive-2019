@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
+import kotlin.math.abs
+import kotlin.math.absoluteValue
 
 const val SECOND = 1000L
 const val MINUTE = 60 * SECOND
@@ -94,21 +96,36 @@ fun Date.humanizeDiff(date:Date):String{
    // 26ч - 360д "N дней назад"
    // >360д "более года назад"
     var dif:Int = ((Date().time - date.time)/ SECOND.toInt()).toInt()
-    var dif_min:Int = ((Date().time - date.time)/ MINUTE.toInt()).toInt()
-    var dif_hor:Int = ((Date().time - date.time)/ HOUR.toInt()).toInt()
-    var dif_day:Int = ((Date().time - date.time)/ DAY.toInt()).toInt()
-    var strdif:String = when(dif){
-        in 0..1 -> "только что"
-        in 2..45 -> "несколько секунд назад"
-        in 46..75 -> "минуту назад"
-        in 76..2700 -> "$dif_min ${convert_str_min(dif_min)} назад"
-        in 2701..4500 -> "час назад"
-        in 4501..79200 -> "$dif_hor ${convert_str_hor(dif_hor)} назад"
-        in 79201..93600 -> "день назад"
-        in 93601..31104000 -> "$dif_day ${convert_str_day(dif_day)} назад"
-        else -> "более года назад"
+    var dif_min:Int = abs(((Date().time - date.time)/ MINUTE.toInt()).toInt())
+    var dif_hor:Int = abs(((Date().time - date.time)/ HOUR.toInt()).toInt())
+    var dif_day:Int = abs(((Date().time - date.time)/ DAY.toInt()).toInt())
+    var strdif:String = ""
+    if(dif >= 0)
+        strdif = when(dif){
+            in 0..1 -> "только что"
+            in 2..45 -> "несколько секунд назад"
+            in 46..75 -> "минуту назад"
+            in 76..2700 -> "$dif_min ${convert_str_min(dif_min)} назад"
+            in 2701..4500 -> "час назад"
+            in 4501..79200 -> "$dif_hor ${convert_str_hor(dif_hor)} назад"
+            in 79201..93600 -> "день назад"
+            in 93601..31104000 -> "$dif_day ${convert_str_day(dif_day)} назад"
+            else -> "более года назад"
+        }
+    else{
+        strdif = when(abs(dif)){
+            in 0..1 -> "только что"
+            in 2..45 -> "через несколько секунд"
+            in 46..75 -> "через минуту"
+            in 76..2700 -> "через $dif_min ${convert_str_min(dif_min)}"
+            in 2701..4500 -> "через час"
+            in 4501..79200 -> "через $dif_hor ${convert_str_hor(dif_hor)}"
+            in 79201..93600 -> "через день"
+            in 93601..31104000 -> "через $dif_day ${convert_str_day(dif_day)}"
+            else -> "более чем через год"
+        }
     }
-    println(dif)
+
     return "$strdif"
 }
 
