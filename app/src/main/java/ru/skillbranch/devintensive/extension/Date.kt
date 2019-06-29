@@ -100,7 +100,7 @@ fun Date.humanizeDiff(date:Date? = this):String{
     var dif_min:Int = abs(((Date().time - dt.time)/ MINUTE.toInt()).toInt())
     var dif_hor:Int = abs(((Date().time - dt.time)/ HOUR.toInt()).toInt())
     var dif_day:Int = abs(((Date().time - dt.time)/ DAY.toInt()).toInt())
-    var strdif:String = ""
+    var strdif:String
     if(dif >= 0)
         strdif = when(dif){
             in 0..1 -> "только что"
