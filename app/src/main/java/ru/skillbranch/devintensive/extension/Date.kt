@@ -84,7 +84,8 @@ fun convert_str_min(dif:Int):String{
     return sec_txt
 }
 
-fun Date.humanizeDiff(date:Date):String{
+fun Date.humanizeDiff(date:Date? = this):String{
+    var dt:Date = if(date != null) date else this
 
    // 0с - 1с "только что"
    // 1с - 45с "несколько секунд назад"
@@ -95,15 +96,15 @@ fun Date.humanizeDiff(date:Date):String{
    // 22ч - 26ч "день назад"
    // 26ч - 360д "N дней назад"
    // >360д "более года назад"
-    var dif:Int = ((Date().time - date.time)/ SECOND.toInt()).toInt()
-    var dif_min:Int = abs(((Date().time - date.time)/ MINUTE.toInt()).toInt())
-    var dif_hor:Int = abs(((Date().time - date.time)/ HOUR.toInt()).toInt())
-    var dif_day:Int = abs(((Date().time - date.time)/ DAY.toInt()).toInt())
+    var dif:Int = ((Date().time - dt.time)/ SECOND.toInt()).toInt()
+    var dif_min:Int = abs(((Date().time - dt.time)/ MINUTE.toInt()).toInt())
+    var dif_hor:Int = abs(((Date().time - dt.time)/ HOUR.toInt()).toInt())
+    var dif_day:Int = abs(((Date().time - dt.time)/ DAY.toInt()).toInt())
     var strdif:String = ""
     if(dif >= 0)
         strdif = when(dif){
             in 0..1 -> "только что"
-            in 2..45 -> "несколько секунд назад"
+            in 1..45 -> "несколько секунд назад"
             in 46..75 -> "минуту назад"
             in 76..2700 -> "$dif_min ${convert_str_min(dif_min)} назад"
             in 2701..4500 -> "час назад"
