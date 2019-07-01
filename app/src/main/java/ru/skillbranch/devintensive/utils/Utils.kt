@@ -23,9 +23,9 @@ object Utils {
         if(lastName != null)
             if(lastName.replace(" ","").length >0)
                 ln  = lastName
-        var res:String = ""
+        var res:String? = null
         if (fn != null)
-            res += fn.substring(0,1).toUpperCase()
+            res = fn.substring(0,1).toUpperCase()
         if (ln != null)
             res += ln.substring(0,1).toUpperCase()
 
@@ -33,9 +33,9 @@ object Utils {
     }
 
     fun transliteration(payload:String, divider:String = " "):String{
-        var res:String = ""
+        var res = ""
         payload.forEach{
-            var r:String = it.toString()
+            val r:String = it.toString()
             if(rus.indexOf(r) > -1)
                 res += en.get(rus.indexOf(r))
             else
