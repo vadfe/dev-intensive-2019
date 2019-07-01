@@ -1,11 +1,8 @@
-package ru.skillbranch.devintensive.extension
+package ru.skillbranch.devintensive.extensions
 
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
-import java.util.regex.Pattern
 import kotlin.math.abs
-import kotlin.math.absoluteValue
 
 const val SECOND = 1000L
 const val MINUTE = 60 * SECOND
