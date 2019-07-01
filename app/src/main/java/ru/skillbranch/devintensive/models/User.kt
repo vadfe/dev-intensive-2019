@@ -20,6 +20,12 @@ data class User(
        lastName = lastName,
        avatar = null
     )
+    constructor(id :String) : this (
+        id = id,
+        firstName = "John",
+        lastName = "Doe",
+        avatar = null
+    )
     constructor(builder: Builder) : this(
         id = builder.lastId.toString(),
         firstName=builder.firstName,
