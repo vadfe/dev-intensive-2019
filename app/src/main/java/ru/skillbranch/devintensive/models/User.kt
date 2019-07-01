@@ -12,7 +12,7 @@ data class User(
     var rating: Int = 0,
     var respect: Int = 0,
     val lastVisit: Date? = null,
-    val isOnline: Boolean = false
+    var isOnline: Boolean = false
 ) {
     constructor(id :String, firstName:String?, lastName:String?) : this (
        id = id,
@@ -27,7 +27,7 @@ data class User(
         avatar = null
     )
     constructor(builder: Builder) : this(
-        id = builder.lastId.toString(),
+        id = builder.id,
         firstName=builder.firstName,
         lastName=builder.lastName,
         avatar=builder.avatar,
@@ -52,7 +52,7 @@ data class User(
     }
 
     class  Builder {
-        var lastId : Int = -1
+        var id : String = "0"
             private set
         var firstName: String? = null
             private set
@@ -68,7 +68,7 @@ data class User(
             private set
         var isOnline: Boolean = false
             private set
-
+        fun id(id: String) = apply { this.id = id }
         fun firstName(firstName: String) = apply { this.firstName = firstName }
         fun lastName(lastName: String) = apply { this.lastName = lastName }
         fun avatar(avatar: String) = apply { this.avatar = avatar }
@@ -77,8 +77,7 @@ data class User(
         fun lastVisit(lastVisit: Date) = apply { this.lastVisit = lastVisit }
         fun isOnline(isOnline: Boolean) = apply { this.isOnline = isOnline }
         fun build(): User {
-            lastId ++
-            return User(id="$lastId", firstName=this.firstName, lastName=this.lastName,
+            return User(id=this.id, firstName=this.firstName, lastName=this.lastName,
                 avatar=this.avatar, rating=this.rating, respect=this.respect,
                 lastVisit=this.lastVisit, isOnline=this.isOnline)
         }
