@@ -27,7 +27,10 @@ object Utils {
         if (fn != null)
             res = fn.substring(0,1).toUpperCase()
         if (ln != null)
-            res += ln.substring(0,1).toUpperCase()
+            if(res!= null)
+                res += ln.substring(0,1).toUpperCase()
+        else
+                res = ln.substring(0,1).toUpperCase()
 
         return res
     }
