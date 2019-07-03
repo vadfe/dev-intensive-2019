@@ -1,10 +1,17 @@
 package ru.skillbranch.devintensive.extensions
 
 fun String.truncate(tr:Int = 16):String{
-    var res = this.substring(0,if(tr<this.length)tr else this.length)
+    var res = this
+    val le = tr+1
     while(res.substring(res.length-1) == " ")
         res = res.substring(0,res.length-1)
-    return  res+if(this.length > tr) "..." else ""
+
+    val nad:Boolean = if(res.length > le) true else false
+    res = this.substring(0,if(le<this.length)le else this.length)
+    while(res.substring(res.length-1) == " ")
+        res = res.substring(0,res.length-1)
+
+    return  res+if(nad) "..." else ""
 }
 
 fun String.stripHtml():String{
