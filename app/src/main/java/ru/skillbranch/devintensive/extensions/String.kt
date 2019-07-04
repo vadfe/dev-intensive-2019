@@ -2,7 +2,7 @@ package ru.skillbranch.devintensive.extensions
 
 fun String.truncate(tr:Int = 15):String{
     var res = this
-    val le = tr
+    val le = tr+1
     while(res.substring(res.length-1) == " ")
         res = res.substring(0,res.length-1)
 
