@@ -14,24 +14,25 @@ class Bender(var status:Status = Status.NORMAL, var question: Question = Questio
     }
 
     fun listenAnswer(answer:String):Pair<String, Triple<Int, Int, Int>>{
-        return if(question.validateAnswer(answer)){
-                    if (question.answers.contains(answer.toLowerCase())){
-                        question = question.nextQuestion()
-                        "Отлично - ты справился\n${question.question}" to status.color
-                    }
-                    else{
-                        countAnswer +=1
-                        if(countAnswer<=3)
-                        {
-                            status = status.nextStatus()
-                            "Это неправильный ответ\n${question.question}" to status.color
+        return if(question.validateAnswer(answer)) {
+                    if (question == Question.IDLE) {
+                        "На этом все, вопросов больше нет" to status.color
+                    } else {
+                        if (question.answers.contains(answer.toLowerCase())) {
+                            question = question.nextQuestion()
+                            "Отлично - ты справился\n${question.question}" to status.color
                         }
-                        else
-                        {
-                            countAnswer = 0
-                            status = Status.NORMAL
-                            question = Question.NAME
-                            "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+                        else {
+                            countAnswer += 1
+                            if (countAnswer <= 3) {
+                                status = status.nextStatus()
+                                "Это неправильный ответ\n${question.question}" to status.color
+                            } else {
+                                countAnswer = 0
+                                status = Status.NORMAL
+                                question = Question.NAME
+                                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+                            }
                         }
                     }
                 }
