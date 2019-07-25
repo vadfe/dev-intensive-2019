@@ -1,10 +1,11 @@
-package ru.skillbranch.devintensive.ui
+package ru.skillbranch.devintensive.ui.profile
 
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -29,9 +30,8 @@ class ProfileActivity: AppCompatActivity() {
         setContentView(R.layout.activity_profile_constraint)
         initViews(savedInstanceState)
         initViewModel()
+         Log.d("M_ProfileActivity", "onCreate")
     }
-
-
 
     override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
         super.onSaveInstanceState(outState, outPersistentState)
@@ -39,8 +39,14 @@ class ProfileActivity: AppCompatActivity() {
     }
 
     private fun initViewModel(){
-        val viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer { updateUI(it) })
+        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+    }
+
+    private fun updateTheme(mode: Int) {
+         Log.d("M_ProfileActivity", "updateTheme")
+        delegate.setLocalNightMode(mode)
     }
 
     private fun updateUI(profile: Profile) {
@@ -53,7 +59,7 @@ class ProfileActivity: AppCompatActivity() {
 
     private fun initViews(savedInstanceState: Bundle?){
         viewFields = mapOf(
-            "nickMame" to tv_nick_name,
+            "nickName" to tv_nick_name,
             "rank" to tv_rank,
             "firstName" to et_first_name,
             "lastName" to et_last_name,
@@ -61,13 +67,18 @@ class ProfileActivity: AppCompatActivity() {
             "repository" to et_repository,
             "rating" to tv_rating,
             "respect" to tv_respect
-        )
+        )!!
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         showCurrentMode(isEditMode)
+
         btn_edit.setOnClickListener{
             saveProfileInfo()
             isEditMode = !isEditMode
             showCurrentMode(isEditMode)
+        }
+
+        btn_switch_theme.setOnClickListener{
+            viewModel.swithTheme()
         }
     }
 

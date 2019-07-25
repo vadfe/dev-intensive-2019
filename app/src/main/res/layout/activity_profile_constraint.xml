@@ -22,11 +22,14 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" app:layout_constraintBottom_toTopOf="@+id/tv_nick_name"/>
     <ImageButton
             android:layout_width="@dimen/btn_round_size_40"
-            android:layout_height="@dimen/btn_round_size_40" app:srcCompat="@drawable/ic_switch_day_night"
+            android:layout_height="@dimen/btn_round_size_40"
+            app:srcCompat="@drawable/ic_switch_day_night"
             android:id="@+id/btn_switch_theme"
-            android:background="@drawable/btn_round_bg" app:layout_constraintEnd_toStartOf="@+id/iv_avatar"
+            android:background="@drawable/btn_round_bg"
+            app:layout_constraintEnd_toStartOf="@+id/iv_avatar"
             app:layout_constraintTop_toTopOf="@+id/iv_avatar"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar" android:layout_marginEnd="32dp"/>
+            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+            android:layout_marginEnd="32dp"/>
     <ImageButton
             android:layout_width="@dimen/btn_round_size_40"
             android:layout_height="@dimen/btn_round_size_40" app:srcCompat="@drawable/ic_edit_black_24dp"
@@ -54,25 +57,35 @@
     <View
             android:layout_width="0dp"
             android:layout_height="80dp"
-            android:id="@+id/view" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/imageView"
-            android:background="@color/color_primary_light"/>
+            android:id="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:background="?attr/colorAccentedSurface"/>
     <View
             android:layout_width="1dp"
             android:layout_height="0dp"
-            android:id="@+id/view2" app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view" app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/view" android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp" android:background="@color/color_divider_light"/>
+            android:id="@+id/view2"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintTop_toTopOf="@+id/view"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/color_divider_light"/>
     <TextView
             android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_rating" style="@style/Profile.Metrics.Value"
-            app:layout_constraintEnd_toStartOf="@+id/view2" app:layout_constraintStart_toStartOf="@+id/view"
+            android:id="@+id/tv_rating"
+            style="@style/Profile.Metrics.Value"
+            app:layout_constraintEnd_toStartOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
-            app:layout_constraintVertical_chainStyle="packed" app:layout_constraintTop_toTopOf="@+id/view"/>
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="@+id/view"
+            android:drawableLeft="@drawable/ic_sp_24"/>
     <TextView
             android:text="@string/profile_label_rating"
             android:layout_width="wrap_content"
@@ -91,7 +104,8 @@
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintTop_toTopOf="@+id/view"
             app:layout_constraintStart_toEndOf="@+id/view2"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+    android:drawableLeft="@drawable/ic_respect_24"/>
     <TextView
             android:text="@string/profile_label_respect"
             android:layout_width="wrap_content"
@@ -137,8 +151,10 @@
             android:layout_height="1dp"
             android:id="@+id/divider"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="72dp" android:background="@color/color_divider_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="72dp"
+            android:background="?attr/colorDivider"
             android:layout_marginTop="5dp"/>
     <ImageView
             android:layout_width="@dimen/btn_round_size_40"
@@ -163,8 +179,10 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:id="@+id/divider2"
-            app:layout_constraintTop_toBottomOf="@+id/wr_about" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="72dp" android:background="@color/color_divider_dark"
+            app:layout_constraintTop_toBottomOf="@+id/wr_about"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="72dp"
+            android:background="?attr/colorDivider"
             android:layout_marginTop="5dp"/>
     <ImageView
             android:layout_width="@dimen/btn_round_size_40"
