@@ -1,16 +1,23 @@
 package ru.skillbranch.devintensive.ui.custom
 
 import android.content.Context
-import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import ru.skillbranch.devintensive.R
-import android.graphics.RectF
-import android.graphics.Path
 import android.util.Log
 
-import android.graphics.Paint
+import android.graphics.Shader.TileMode
+
+import android.graphics.*
+import android.R.color
+import android.graphics.RectF
+//import java.awt.AlphaComposite.SRC_IN
+import android.graphics.PorterDuffXfermode
+
+
+
+
 
 
 class CircleImageView @JvmOverloads constructor(
@@ -19,47 +26,58 @@ class CircleImageView @JvmOverloads constructor(
     defStyleAttr:Int = 0
     ):ImageView(context,attrs, defStyleAttr) {
     companion object{
-        private const val DEFAULT_ASPECT_RATIO = 1.78f
+        //private const val DEFAULT_ASPECT_RATIO = 1.78f
+        private const val DEFAULT_BORDER_COLOR = Color.WHITE
+        private const val DEFAULT_BORDER_WIDTH = 2F
     }
 
-    private var aspectRatio = DEFAULT_ASPECT_RATIO
-    private val radius = 58.0f
-    private var path: Path? = null
-    private var rect: RectF? = null
+    //private var aspectRatio = DEFAULT_ASPECT_RATIO
+    private var borderColor  = DEFAULT_BORDER_COLOR
+    private var borderWidth  = DEFAULT_BORDER_WIDTH
 
     init {
         if(attrs != null){
-            val a = context.obtainStyledAttributes(attrs, R.styleable.AspectRatioImageView)
-            aspectRatio = a.getFloat(R.styleable.AspectRatioImageView_aspectRatio, DEFAULT_ASPECT_RATIO)
+            val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
+            borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
+            borderWidth = a.getDimension(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH)
             a.recycle()
         }
-        path = Path()
+    }
+
+    fun getBorderWidth():Int = borderWidth.toInt()
+    fun setBorderWidth(dp:Int) {
+        borderWidth = dp.toFloat()
+    }
+    fun getBorderColor():Int = borderColor
+    fun setBorderColor(hex:String) {
+        borderColor = Color.parseColor(hex)
+    }
+    fun setBorderColor(@ColorRes colorId: Int) {
+        borderColor = colorId
 
     }
 
-    fun getBorderWidth():Int = 0
-    fun setBorderWidth(dp:Int) = 0
-    fun getBorderColor():Int = 0
-    fun setBorderColor(hex:String) = 0
-    fun setBorderColor(@ColorRes colorId: Int) = 0
-
     override fun onDraw(canvas: Canvas?) {
+        val halfWidth = this.width / 2
+        val halfHeight = this.height / 2
+        val radius = Math.max(halfWidth, halfHeight)
 
-
+        val path = Path()
+        path.addCircle(halfWidth.toFloat(), halfHeight.toFloat(), radius.toFloat(), Path.Direction.CCW)
+        val  paint =  Paint(Paint.ANTI_ALIAS_FLAG)
+        val rect = Rect(0, 0, this.width, this.height)
+        val rectF = RectF(rect)
+        canvas?.drawOval(rectF, paint)
+        paint.color = borderColor
+        paint.style = Paint.Style.STROKE
+        paint.strokeWidth = borderWidth.toFloat()
+        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+        canvas?.drawPath(path, paint)
         super.onDraw(canvas)
-        //rect = RectF(0f, 0f, this.width.toFloat(), this.height.toFloat())
-        //path?.addRoundRect(rect, this.width.toFloat()/2, this.width.toFloat()/2, Path.Direction.CW)
-        //canvas?.clipPath(path)
-        val mBitmapPaint = Paint()
-        mBitmapPaint.setAntiAlias(true)
-        canvas?.drawCircle(this.width.toFloat()/2,this.height.toFloat()/2, this.width.toFloat()/2, mBitmapPaint);
-        Log.d("M_CircleImageView", "onDraw "+this.width+" "+this.height)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         Log.d("M_CircleImageView", "onMeasure ")
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        //val newHeight = (measuredWidth/aspectRatio).toInt()
-        //setMeasuredDimension(measuredWidth, newHeight)
     }
 }
