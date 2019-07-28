@@ -14,8 +14,17 @@ import android.R.color
 import android.graphics.RectF
 //import java.awt.AlphaComposite.SRC_IN
 import android.graphics.PorterDuffXfermode
-
-
+import android.graphics.Paint.ANTI_ALIAS_FLAG
+import android.R.id.mask
+import android.opengl.ETC1.getHeight
+import android.opengl.ETC1.getWidth
+import android.graphics.Bitmap
+import android.graphics.PorterDuff
+import android.graphics.Paint.ANTI_ALIAS_FLAG
+import android.R.id.mask
+import android.graphics.BitmapFactory
+import android.opengl.ETC1.getHeight
+import android.opengl.ETC1.getWidth
 
 
 
@@ -58,22 +67,25 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
         val halfWidth = this.width / 2
         val halfHeight = this.height / 2
         val radius = Math.max(halfWidth, halfHeight)
-
         val path = Path()
         path.addCircle(halfWidth.toFloat(), halfHeight.toFloat(), radius.toFloat(), Path.Direction.CCW)
-        val  paint =  Paint(Paint.ANTI_ALIAS_FLAG)
         val rect = Rect(0, 0, this.width, this.height)
         val rectF = RectF(rect)
-        canvas?.drawOval(rectF, paint)
-        paint.color = borderColor
-        paint.style = Paint.Style.STROKE
-        paint.strokeWidth = borderWidth.toFloat()
-        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+        val  paint =  Paint(Paint.ANTI_ALIAS_FLAG)
+        paint.color = Color.WHITE
+        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
         canvas?.drawPath(path, paint)
-        super.onDraw(canvas)
+        paint.xfermode = null
+        paint.style = Paint.Style.STROKE
+        paint.strokeWidth = borderWidth
+        paint.color = borderColor
+        canvas!!.drawCircle(halfWidth.toFloat(),halfHeight.toFloat(),radius.toFloat()-borderWidth/2,paint)
+
+
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

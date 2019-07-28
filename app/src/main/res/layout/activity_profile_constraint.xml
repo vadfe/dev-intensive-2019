@@ -9,17 +9,24 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:srcCompat="@drawable/profile_bg"
-            android:id="@+id/imageView" app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/imageView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintDimensionRatio="16:9" android:scaleType="centerCrop"/>
-    <ImageView
+            app:layout_constraintDimensionRatio="16:9"
+            android:scaleType="centerCrop"/>
+    <ru.skillbranch.devintensive.ui.custom.CircleImageView
             android:layout_width="@dimen/avatar_round_size"
             android:layout_height="@dimen/avatar_round_size"
-            app:srcCompat="@drawable/avatar_default"
-            android:id="@+id/iv_avatar" app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" app:layout_constraintBottom_toTopOf="@+id/tv_nick_name"/>
+            android:src="@drawable/avatarface"
+            android:id="@+id/iv_avatar"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintBottom_toTopOf="@+id/tv_nick_name"
+            app:cv_borderColor="#FF0000"
+            app:cv_borderWidth="10dp"/>
     <ImageButton
             android:layout_width="@dimen/btn_round_size_40"
             android:layout_height="@dimen/btn_round_size_40"
@@ -38,7 +45,7 @@
             app:layout_constraintTop_toTopOf="@+id/iv_avatar"
             app:layout_constraintBottom_toBottomOf="@+id/iv_avatar" android:layout_marginStart="32dp"/>
     <TextView
-            android:text="John Doe"
+            tools:text="John Doe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_nick_name" style="@style/Profile.Header.Nickname"
@@ -46,7 +53,7 @@
             app:layout_constraintStart_toStartOf="@+id/iv_avatar" app:layout_constraintEnd_toEndOf="@+id/iv_avatar"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintBottom_toTopOf="@+id/tv_rank"/>
     <TextView
-            android:text="Junior Android Developer"
+            tools:text="Junior Android Developer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_rank" style="@style/Profile.Header.Rank"
@@ -74,7 +81,7 @@
             android:layout_marginBottom="16dp"
             android:background="@color/color_divider_light"/>
     <TextView
-            android:text="0"
+            tools:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_rating"
@@ -95,7 +102,7 @@
             app:layout_constraintStart_toStartOf="@+id/tv_rating"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintBottom_toBottomOf="@+id/view"/>
     <TextView
-            android:text="0"
+            tools:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_respect"
@@ -194,8 +201,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/wr_repository"
-            app:layout_constraintTop_toTopOf="@+id/imageView5" app:layout_constraintStart_toEndOf="@+id/imageView5"
-            android:layout_marginStart="16dp" app:layout_constraintEnd_toStartOf="@+id/ic_eye"
+            app:layout_constraintTop_toTopOf="@+id/imageView5"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/ic_eye"
             android:layout_marginEnd="16dp">
 
         <com.google.android.material.textfield.TextInputEditText

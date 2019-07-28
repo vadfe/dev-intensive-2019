@@ -1,5 +1,8 @@
 package ru.skillbranch.devintensive.utils
 
+import android.util.Log
+import java.util.regex.Pattern
+
 val rus  = listOf("а","б","в","г","д","е","ё","ж","з","и","й","к","л","м","н","о","п","р","с","т","у","ф","х","ц","ч","ш","щ","ъ","ы","ь","э","ю","я", " ")
 val rus_up  = listOf("А","Б","В","Г","Д","Е","Ё","Ж","З","И","Й","К","Л","М","Н","О","П","Р","С","Т","У","Ф","Х","Ц","Ч","Ш","Щ","Ъ","Ы","Ь","Э","Ю","Я"," ")
 val en  = listOf("a","b","v","g","d","e","e","zh","z","i","i","k","l","m","n","o","p","r","s","t","u","f","h","c","ch","sh","sh'","","i","","e","yu","ya"," ")
@@ -50,4 +53,36 @@ object Utils {
         }
         return res.replace(" ", divider)
     }
+
+    fun url_validator(_url:String):Boolean{
+        val  exept_word = setOf(
+                "enterprise",
+                "features",
+                "topics",
+                "collections",
+                "trending",
+                "events",
+                "marketplace",
+                "pricing",
+                "nonprofit",
+                "customer-stories",
+                "security",
+                "login",
+                "join"
+        )
+        with(exept_word){
+            for(s in this)
+                if(_url.contains(s, true))
+                    return false
+        }
+        val lRegex = with(StringBuilder()){
+            append("^((https://github.com)?|(https://www.github.com)|(github.com)|(www.github.com))/[-a-zA-Z0-9]{1,}$")
+        }.toString()
+        val p = Pattern.compile(lRegex)
+        val m = p.matcher(_url)
+        val res = m.find()
+        return res
+    }
+
+
 }

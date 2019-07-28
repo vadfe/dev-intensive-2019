@@ -6,6 +6,7 @@ import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -15,7 +16,10 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile_constraint.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.utils.Utils
+import ru.skillbranch.devintensive.utils.Utils.url_validator
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
+import java.util.regex.Pattern
 
 class ProfileActivity: AppCompatActivity() {
     companion object{
@@ -26,6 +30,7 @@ class ProfileActivity: AppCompatActivity() {
     lateinit var viewFields: Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_constraint)
         initViews(savedInstanceState)
@@ -53,6 +58,7 @@ class ProfileActivity: AppCompatActivity() {
         profile.toMap().also{
             for((k,v) in viewFields){
                 v.text = it[k].toString()
+                 Log.d("M_ProfileActivity", "k="+k+" v="+it[k].toString())
             }
         }
     }
@@ -72,9 +78,19 @@ class ProfileActivity: AppCompatActivity() {
         showCurrentMode(isEditMode)
 
         btn_edit.setOnClickListener{
-            saveProfileInfo()
-            isEditMode = !isEditMode
-            showCurrentMode(isEditMode)
+            if(isEditMode) {
+                if (!url_validator(et_repository.text.toString())) {
+                    wr_repository.error = "Невалидный адрес репозитория"
+                    et_repository.text!!.clear()
+                } else {
+                    saveProfileInfo()
+                    isEditMode = !isEditMode
+                    showCurrentMode(isEditMode)
+                }
+            }else{
+                isEditMode = !isEditMode
+                showCurrentMode(isEditMode)
+            }
         }
 
         btn_switch_theme.setOnClickListener{
