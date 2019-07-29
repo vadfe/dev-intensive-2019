@@ -18,7 +18,7 @@ class CircleImageView @JvmOverloads constructor(
     context: Context,
     attrs:AttributeSet? = null,
     defStyleAttr:Int = 0
-    ):ImageView(context,attrs, defStyleAttr) {
+):ImageView(context,attrs, defStyleAttr) {
     companion object{
         //private const val DEFAULT_ASPECT_RATIO = 1.78f
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
@@ -89,9 +89,9 @@ class CircleImageView @JvmOverloads constructor(
         mShaderMatrix.set(null)
         var scale = 0.5F
         if (mBitmapWidth * mDrawableRect.height() > mDrawableRect.width() * mBitmapHeight) {
-             scale = mDrawableRect.height() / mBitmapHeight
+            scale = mDrawableRect.height() / mBitmapHeight
         } else {
-             scale = mDrawableRect.width() / mBitmapWidth
+            scale = mDrawableRect.width() / mBitmapWidth
         }
 
         mShaderMatrix.setScale(scale, scale)
