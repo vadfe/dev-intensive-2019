@@ -30,12 +30,12 @@ class ProfileActivity: AppCompatActivity() {
     lateinit var viewFields: Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.SplashTheme)
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_constraint)
         initViews(savedInstanceState)
         initViewModel()
-         Log.d("M_ProfileActivity", "onCreate")
+        Log.d("M_ProfileActivity", "onCreate")
     }
 
     override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
@@ -50,7 +50,7 @@ class ProfileActivity: AppCompatActivity() {
     }
 
     private fun updateTheme(mode: Int) {
-         Log.d("M_ProfileActivity", "updateTheme")
+        Log.d("M_ProfileActivity", "updateTheme")
         delegate.setLocalNightMode(mode)
     }
 
@@ -58,7 +58,7 @@ class ProfileActivity: AppCompatActivity() {
         profile.toMap().also{
             for((k,v) in viewFields){
                 v.text = it[k].toString()
-                 Log.d("M_ProfileActivity", "k="+k+" v="+it[k].toString())
+                Log.d("M_ProfileActivity", "k="+k+" v="+it[k].toString())
             }
         }
     }
@@ -73,7 +73,7 @@ class ProfileActivity: AppCompatActivity() {
             "repository" to et_repository,
             "rating" to tv_rating,
             "respect" to tv_respect
-        )
+        )!!
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         showCurrentMode(isEditMode)
 
