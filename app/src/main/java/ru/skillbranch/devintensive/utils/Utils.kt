@@ -1,7 +1,18 @@
 package ru.skillbranch.devintensive.utils
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.util.Log
+import ru.skillbranch.devintensive.R
 import java.util.regex.Pattern
+import android.R.attr.y
+import android.R.attr.x
+import android.graphics.Color
+import android.graphics.Paint
+
 
 val rus  = listOf("а","б","в","г","д","е","ё","ж","з","и","й","к","л","м","н","о","п","р","с","т","у","ф","х","ц","ч","ш","щ","ъ","ы","ь","э","ю","я", " ")
 val rus_up  = listOf("А","Б","В","Г","Д","Е","Ё","Ж","З","И","Й","К","Л","М","Н","О","П","Р","С","Т","У","Ф","Х","Ц","Ч","Ш","Щ","Ъ","Ы","Ь","Э","Ю","Я"," ")
@@ -37,6 +48,8 @@ object Utils {
 
         return res
     }
+
+
 
     fun transliteration(payload:String, divider:String = " "):String{
         var res = ""

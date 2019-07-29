@@ -13,6 +13,8 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.BitmapShader
 import android.graphics.RectF
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
 
 class CircleImageView @JvmOverloads constructor(
     context: Context,
@@ -25,7 +27,6 @@ class CircleImageView @JvmOverloads constructor(
         private const val DEFAULT_BORDER_WIDTH = 2F
     }
 
-    //private var aspectRatio = DEFAULT_ASPECT_RATIO
     private var borderColor  = DEFAULT_BORDER_COLOR
     private var borderWidth  = DEFAULT_BORDER_WIDTH
     private var mBitmap:Bitmap? = null
@@ -99,8 +100,25 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     private fun initializeBitmap() {
-        mBitmap = getBitmapFromDrawable(getDrawable())
+        //mBitmap = getBitmapFromDrawable(getDrawable())
+        mBitmap = getBitmapFromInitials(getDrawable())
         setup()
+    }
+
+    private fun getBitmapFromInitials(drawable: Drawable?):Bitmap{
+        val originalBitmap = getBitmapFromDrawable(drawable)
+        var bmp: Bitmap? = originalBitmap?.copy(Bitmap.Config.ARGB_8888, true)
+        var canvas = Canvas(bmp)
+        val paint = Paint()
+        paint.color = Color.BLACK // Text Color
+        canvas.drawBitmap(bmp, 0F, 0F, paint)
+        paint.setTextSize(12F) // Text Size
+        paint.color = Color.BLACK // Text Color
+        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OVER) // Text Overlapping Pattern
+
+        canvas.drawText("Testing...", 10F, 10F, paint)
+
+        return bmp!!
     }
 
     private fun getBitmapFromDrawable(drawable: Drawable?): Bitmap? {
