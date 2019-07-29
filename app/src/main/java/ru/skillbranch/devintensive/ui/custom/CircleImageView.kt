@@ -13,6 +13,10 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.BitmapShader
 import android.graphics.RectF
+import android.R.attr.bitmap
+
+
+
 
 class CircleImageView @JvmOverloads constructor(
     context: Context,
@@ -71,18 +75,45 @@ class CircleImageView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
         //super.onDraw(canvas)
-        initializeBitmap()
-        val halfWidth = this.width / 2
-        val halfHeight = this.height / 2
-        val radius = Math.max(halfWidth, halfHeight)
-        val rect = Rect(0, 0, this.width, this.height)
-        canvas?.drawCircle(rect.centerX().toFloat(), rect.centerY().toFloat(), radius.toFloat(), mBitmapPaint)
-        val  paint =  Paint(Paint.ANTI_ALIAS_FLAG)
-        paint.style = Paint.Style.STROKE
-        paint.strokeWidth = borderWidth
-        paint.color = borderColor
-        canvas?.drawCircle(halfWidth.toFloat(),halfHeight.toFloat(),radius.toFloat()-borderWidth/2,paint)
+        Log.d("M_CircleImageView", "onDraw width="+ this.width + " height="+this.height )
 
+        draweRoundBmp(canvas)
+    }
+
+    private fun draweRoundBmp(canvas: Canvas?){
+        initializeBitmap()
+        if(mBitmap != null) {
+            val halfWidth = this.width / 2
+            val halfHeight = this.height / 2
+            val radius = Math.max(halfWidth, halfHeight)
+            val rect = Rect(0, 0, this.width, this.height)
+            canvas?.drawCircle(rect.centerX().toFloat(), rect.centerY().toFloat(), radius.toFloat(), mBitmapPaint)
+            val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = borderWidth
+            paint.color = borderColor
+            canvas?.drawCircle(halfWidth.toFloat(), halfHeight.toFloat(), radius.toFloat() - borderWidth / 2, paint)
+        }else{
+            val halfWidth = this.width / 2
+            val halfHeight = this.height / 2
+
+            var text = "JD"
+            var fontPaint = Paint()
+            fontPaint.color = Color.WHITE
+            fontPaint.textSize  = 100F
+            fontPaint.style = Paint.Style.STROKE
+            var width_txt = fontPaint.measureText(text)
+            canvas?.drawARGB(80, 102, 204, 255);
+            canvas?.drawText(text, halfWidth.toFloat()-width_txt/2, halfHeight.toFloat(), fontPaint)
+
+
+            val radius = Math.max(halfWidth, halfHeight)
+            val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+            paint.style = Paint.Style.STROKE
+            paint.strokeWidth = borderWidth
+            paint.color = borderColor
+            canvas?.drawCircle(halfWidth.toFloat(), halfHeight.toFloat(), radius.toFloat() - borderWidth / 2, paint)
+        }
     }
 
     private fun updateShaderMatrix(){
@@ -140,7 +171,7 @@ class CircleImageView @JvmOverloads constructor(
         return RectF(left, top, left + sideLength, top + sideLength)
     }
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        Log.d("M_CircleImageView", "onMeasure ")
+        Log.d("M_CircleImageView", "onMeasure width="+measuredWidth+" height="+measuredHeight)
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
