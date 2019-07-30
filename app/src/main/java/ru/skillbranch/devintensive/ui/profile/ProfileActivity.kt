@@ -49,6 +49,7 @@ class ProfileActivity: AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer { updateUI(it) })
         viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+
     }
 
     private fun updateTheme(mode: Int) {
@@ -62,6 +63,7 @@ class ProfileActivity: AppCompatActivity() {
                 v.text = it[k].toString()
             }
         }
+        iv_avatar.generateAvatar(Utils.toInitials(et_first_name.text.toString(),et_last_name.text.toString()))
     }
 
     private fun initViews(savedInstanceState: Bundle?){
@@ -98,6 +100,7 @@ class ProfileActivity: AppCompatActivity() {
         btn_switch_theme.setOnClickListener{
             viewModel.swithTheme()
         }
+
     }
 
     private fun showCurrentMode(isEdtit:Boolean){
