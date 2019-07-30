@@ -76,6 +76,7 @@ object Utils {
     }
 
     fun url_validator(_url:String):Boolean{
+        if(_url.isNullOrEmpty()) return true
         val  exept_word = setOf(
                 "enterprise",
                 "features",

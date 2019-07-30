@@ -26,6 +26,7 @@ class ProfileViewModel : ViewModel(){
 
     fun getProfileData():LiveData<Profile> = profileData
 
+
     fun getTheme():LiveData<Int> = appTheme
 
     fun saveProfileData(profile:Profile){

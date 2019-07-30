@@ -38,7 +38,7 @@ class ProfileActivity: AppCompatActivity() {
          Log.d("M_ProfileActivity", "onCreate")
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState?.putBoolean(IS_EDIT_MODE,isEditMode)
         Log.d("M_ProfileActivity", "onSaveInstanceState IS_EDIT_MODE="+isEditMode)

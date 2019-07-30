@@ -5,12 +5,12 @@ import ru.skillbranch.devintensive.utils.Utils
 data class Profile(
 
 
-    val firstName:String,
-    val lastName:String,
-    val about:String,
-    val repository:String,
-    val rating:Int = 0,
-    val respect:Int =0
+        val firstName:String,
+        val lastName:String,
+        val about:String,
+        var repository:String,
+        val rating:Int = 0,
+        val respect:Int =0
 ) {
     val rank:String = "Junior Android Developer"
     val nickName:String =  Utils.toNickName(firstName,lastName)
