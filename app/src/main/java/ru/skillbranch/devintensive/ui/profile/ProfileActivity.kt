@@ -88,12 +88,11 @@ class ProfileActivity: AppCompatActivity() {
                     wr_repository.error = null
                     saveProfileInfo()
                     isEditMode = !isEditMode
-                    showCurrentMode(isEditMode)
                 }
             }else{
                 isEditMode = !isEditMode
-                showCurrentMode(isEditMode)
             }
+            showCurrentMode(isEditMode)
         }
 
         btn_switch_theme.setOnClickListener{

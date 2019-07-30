@@ -49,7 +49,15 @@ object Utils {
         return res
     }
 
+    fun toNickName(firstName: String?, lastName:String?):String{
+        var nickName:String =  Utils.transliteration(firstName+" "+lastName,"_")
+            if(firstName.toString().isNullOrEmpty())
+                nickName = nickName.replace("_","")
+            if(lastName.toString().isNullOrEmpty())
+                nickName = nickName.replace("_","")
 
+        return nickName
+    }
 
     fun transliteration(payload:String, divider:String = " "):String{
         var res = ""
