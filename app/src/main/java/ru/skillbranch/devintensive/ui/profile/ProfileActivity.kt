@@ -35,12 +35,14 @@ class ProfileActivity: AppCompatActivity() {
         setContentView(R.layout.activity_profile_constraint)
         initViews(savedInstanceState)
         initViewModel()
-        Log.d("M_ProfileActivity", "onCreate")
+         Log.d("M_ProfileActivity", "onCreate")
     }
 
-    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState, outPersistentState)
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
         outState?.putBoolean(IS_EDIT_MODE,isEditMode)
+        Log.d("M_ProfileActivity", "onSaveInstanceState IS_EDIT_MODE="+isEditMode)
+
     }
 
     private fun initViewModel(){
@@ -50,7 +52,7 @@ class ProfileActivity: AppCompatActivity() {
     }
 
     private fun updateTheme(mode: Int) {
-        Log.d("M_ProfileActivity", "updateTheme")
+         Log.d("M_ProfileActivity", "updateTheme")
         delegate.setLocalNightMode(mode)
     }
 
@@ -58,7 +60,6 @@ class ProfileActivity: AppCompatActivity() {
         profile.toMap().also{
             for((k,v) in viewFields){
                 v.text = it[k].toString()
-                Log.d("M_ProfileActivity", "k="+k+" v="+it[k].toString())
             }
         }
     }
@@ -75,6 +76,7 @@ class ProfileActivity: AppCompatActivity() {
             "respect" to tv_respect
         )!!
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
+        Log.d("M_ProfileActivity", "initViews IS_EDIT_MODE="+isEditMode)
         showCurrentMode(isEditMode)
 
         btn_edit.setOnClickListener{
@@ -83,6 +85,7 @@ class ProfileActivity: AppCompatActivity() {
                     wr_repository.error = "Невалидный адрес репозитория"
                     et_repository.text!!.clear()
                 } else {
+                    wr_repository.error = null
                     saveProfileInfo()
                     isEditMode = !isEditMode
                     showCurrentMode(isEditMode)
@@ -99,6 +102,7 @@ class ProfileActivity: AppCompatActivity() {
     }
 
     private fun showCurrentMode(isEdtit:Boolean){
+        Log.d("M_ProfileActivity", "showCurrentMode isEdtit="+isEdtit)
         val info = viewFields.filter{setOf("firstName","lastName","about","repository").contains(it.key)}
         for((_,v) in info){
             v as EditText

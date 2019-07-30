@@ -21,7 +21,7 @@
         android:id="@+id/iv_avatar"
         android:layout_width="@dimen/avatar_round_size"
         android:layout_height="@dimen/avatar_round_size"
-        android:src="@drawable/ic_avatar"
+        android:src="@drawable/avatarface"
         app:cv_borderColor="@color/color_gray"
         app:cv_borderWidth="2dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_nick_name"
