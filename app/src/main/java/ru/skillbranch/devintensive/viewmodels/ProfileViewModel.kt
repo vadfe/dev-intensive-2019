@@ -12,6 +12,7 @@ class ProfileViewModel : ViewModel(){
     private val repository:PreferencesRepository = PreferencesRepository
     private val profileData = MutableLiveData<Profile>()
     private val appTheme = MutableLiveData<Int>()
+    private val repositoryState = MutableLiveData<Boolean>()
 
     init {
          Log.d("M_ProfileViewModel", "init view model")
@@ -22,6 +23,12 @@ class ProfileViewModel : ViewModel(){
     override fun onCleared() {
         super.onCleared()
          Log.d("M_ProfileViewModel", "view model cleared")
+    }
+
+    fun getRepositoryState(): LiveData<Boolean> = repositoryState
+
+    fun setRepositoryState(state: Boolean) {
+        repositoryState.value = state
     }
 
     fun getProfileData():LiveData<Profile> = profileData

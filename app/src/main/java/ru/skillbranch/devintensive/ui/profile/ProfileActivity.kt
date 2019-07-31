@@ -5,6 +5,8 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.View
@@ -49,9 +51,12 @@ class ProfileActivity: AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer { updateUI(it) })
         viewModel.getTheme().observe(this, Observer { updateTheme(it) })
-
+        viewModel.getRepositoryState().observe(this, Observer { updateRepository(it) })
     }
-
+    private fun updateRepository(isError: Boolean) {
+        wr_repository.isErrorEnabled = isError
+        wr_repository.error = if (isError) "Невалидный адрес репозитория" else null
+    }
     private fun updateTheme(mode: Int) {
          Log.d("M_ProfileActivity", "updateTheme")
         delegate.setLocalNightMode(mode)
@@ -80,20 +85,20 @@ class ProfileActivity: AppCompatActivity() {
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         Log.d("M_ProfileActivity", "initViews IS_EDIT_MODE="+isEditMode)
         showCurrentMode(isEditMode)
-
-        btn_edit.setOnClickListener{
-            if(isEditMode) {
-                if (!url_validator(et_repository.text.toString())) {
-                    wr_repository.error = "Невалидный адрес репозитория"
-                    et_repository.text!!.clear()
-                } else {
-                    wr_repository.error = null
-                    saveProfileInfo()
-                    isEditMode = !isEditMode
-                }
-            }else{
-                isEditMode = !isEditMode
+        et_repository.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.setRepositoryState(!Utils.isRepositoryValid(s.toString()))
             }
+        })
+        btn_edit.setOnClickListener {
+            if (wr_repository.isErrorEnabled) {
+                et_repository.text?.clear()
+                viewModel.setRepositoryState(false)
+            }
+            if (isEditMode) saveProfileInfo()
+            isEditMode = isEditMode.not()
             showCurrentMode(isEditMode)
         }
 

@@ -15,8 +15,8 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.utils.Utils
 
 class CircleImageView(
-    context: Context,
-    attrs: AttributeSet? = null
+        context: Context,
+        attrs: AttributeSet? = null
 ) : ImageView(context, attrs){
 
     companion object {
@@ -64,7 +64,7 @@ class CircleImageView(
     }
 
     private fun getRoundedDrawable(bitmap: Bitmap?): Drawable =
-        RoundedBitmapDrawableFactory.create(resources, bitmap).also { it.isCircular = true }
+            RoundedBitmapDrawableFactory.create(resources, bitmap).also { it.isCircular = true }
 
     override fun getDrawable(): Drawable {
         return originalDrawable ?: super.getDrawable()
@@ -127,25 +127,25 @@ class CircleImageView(
     }
 
     fun setBorderColor(@ColorRes colorId: Int) {
-        borderColor = Resources.getSystem().getColor(colorId, context.theme)
+        borderColor = resources.getColor(colorId, context.theme)
         this.invalidate()
     }
 
     private fun getBitmapFromDrawable(drawable: Drawable?) =
-        when (drawable) {
-            null -> null
-            is BitmapDrawable -> drawable.bitmap
-            else -> try {
-                val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-                val canvas = Canvas(bitmap)
-                drawable.setBounds(0, 0, canvas.width, canvas.height)
-                drawable.draw(canvas)
-                bitmap
-            } catch (e: Exception) {
-                e.printStackTrace()
-                null
+            when (drawable) {
+                null -> null
+                is BitmapDrawable -> drawable.bitmap
+                else -> try {
+                    val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+                    val canvas = Canvas(bitmap)
+                    drawable.setBounds(0, 0, canvas.width, canvas.height)
+                    drawable.draw(canvas)
+                    bitmap
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    null
+                }
             }
-        }
 
     override fun onDraw(canvas: Canvas?) {
         if (originalDrawable != null)
