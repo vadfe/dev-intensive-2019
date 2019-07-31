@@ -52,10 +52,10 @@ object Utils {
     }
 
     fun toNickName(firstName: String?, lastName:String?):String{
-        var nickName:String =  Utils.transliteration(firstName+" "+lastName,"_")
-        if(firstName.toString().isNullOrEmpty())
+        var nickName:String =  transliteration(firstName+" "+lastName,"_")
+        if(firstName.isNullOrEmpty())
             nickName = nickName.replace("_","")
-        if(lastName.toString().isNullOrEmpty())
+        if(lastName.isNullOrEmpty())
             nickName = nickName.replace("_","")
 
         return nickName
@@ -77,7 +77,7 @@ object Utils {
         return res.replace(" ", divider)
     }
 
-    fun url_validator(_url:String):Boolean{
+    fun url_validator(_url:String?):Boolean{
         if(_url.isNullOrEmpty()) return true
         val  exept_word = setOf(
             "enterprise",
@@ -100,7 +100,7 @@ object Utils {
                     return false
         }
         val lRegex = with(StringBuilder()){
-            append("^((https://github.com)?|(https://www.github.com)|(github.com)|(www.github.com))/[-a-zA-Z0-9]{1,}$")
+            append("^((https://github.com)?|(https://www.github.com)|(github.com)|(www.github.com))/[a-zA-Z0-9_]{1,}$")
         }.toString()
         val p = Pattern.compile(lRegex)
         val m = p.matcher(_url)
