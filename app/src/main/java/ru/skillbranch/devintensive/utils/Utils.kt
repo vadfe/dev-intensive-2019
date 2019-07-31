@@ -18,7 +18,9 @@ val rus  = listOf("а","б","в","г","д","е","ё","ж","з","и","й","к","�
 val rus_up  = listOf("А","Б","В","Г","Д","Е","Ё","Ж","З","И","Й","К","Л","М","Н","О","П","Р","С","Т","У","Ф","Х","Ц","Ч","Ш","Щ","Ъ","Ы","Ь","Э","Ю","Я"," ")
 val en  = listOf("a","b","v","g","d","e","e","zh","z","i","i","k","l","m","n","o","p","r","s","t","u","f","h","c","ch","sh","sh'","","i","","e","yu","ya"," ")
 val en_up  = listOf("A","B","V","G","D","E","E","Zh","Z","I","I","K","L","M","N","O","P","R","S","T","U","F","H","C","Ch","Sh","Sh'","","I","","E","Yu","Ya"," ")
-
+val ignored = setOf("enterprise", "features", "topics",
+    "collections", "trending", "events", "marketplace", "pricing", "nonprofit",
+    "customer-stories", "security", "login", "join")
 object Utils {
     fun parseFullName(fullName:String?):Pair<String?, String?>{
         val parts : List<String>? = fullName?.split(" ")
@@ -43,7 +45,7 @@ object Utils {
         if (ln != null)
             if(res!= null)
                 res += ln.substring(0,1).toUpperCase()
-        else
+            else
                 res = ln.substring(0,1).toUpperCase()
 
         return res
@@ -51,10 +53,10 @@ object Utils {
 
     fun toNickName(firstName: String?, lastName:String?):String{
         var nickName:String =  Utils.transliteration(firstName+" "+lastName,"_")
-            if(firstName.toString().isNullOrEmpty())
-                nickName = nickName.replace("_","")
-            if(lastName.toString().isNullOrEmpty())
-                nickName = nickName.replace("_","")
+        if(firstName.toString().isNullOrEmpty())
+            nickName = nickName.replace("_","")
+        if(lastName.toString().isNullOrEmpty())
+            nickName = nickName.replace("_","")
 
         return nickName
     }
@@ -66,10 +68,10 @@ object Utils {
             if(rus.indexOf(r) > -1)
                 res += en.get(rus.indexOf(r))
             else
-            if(rus_up.indexOf(r) > -1)
-                res += en_up.get(rus_up.indexOf(r))
-            else
-                res += r
+                if(rus_up.indexOf(r) > -1)
+                    res += en_up.get(rus_up.indexOf(r))
+                else
+                    res += r
 
         }
         return res.replace(" ", divider)
@@ -78,19 +80,19 @@ object Utils {
     fun url_validator(_url:String):Boolean{
         if(_url.isNullOrEmpty()) return true
         val  exept_word = setOf(
-                "enterprise",
-                "features",
-                "topics",
-                "collections",
-                "trending",
-                "events",
-                "marketplace",
-                "pricing",
-                "nonprofit",
-                "customer-stories",
-                "security",
-                "login",
-                "join"
+            "enterprise",
+            "features",
+            "topics",
+            "collections",
+            "trending",
+            "events",
+            "marketplace",
+            "pricing",
+            "nonprofit",
+            "customer-stories",
+            "security",
+            "login",
+            "join"
         )
         with(exept_word){
             for(s in this)
@@ -105,12 +107,14 @@ object Utils {
         val res = m.find()
         return res
     }
-
     fun validateUrl(url: String): Boolean = url.isEmpty() || (
             url.matches("^(https://)?(www.)?github.com/(?=.{1,39}\$)(?![-_])(?!.*[-_]{2})[a-zA-Z0-9-_]+(?<![-])$".toRegex())) &&
             !url.matches( Regex("^.*(/enterprise|/features|/topics|/collections|/trending|/events|/marketplace|/pricing|/nonprofit|/customer-stories|/security|/login|/join\$)",
                 RegexOption.IGNORE_CASE)
             )
 
-
+    fun isRepositoryValid(repository: String): Boolean {
+        val regex = Regex("^(?:https://)?(?:www.)?(?:github.com/)(?!${ignored.joinToString("|")})\\w+$")
+        return repository.isEmpty() || regex.matches(repository)
+    }
 }
