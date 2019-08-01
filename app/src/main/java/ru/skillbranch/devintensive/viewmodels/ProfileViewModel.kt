@@ -54,6 +54,6 @@ class ProfileViewModel : ViewModel(){
         Log.d("M_ProfileViewModel", "swithTheme "+appTheme.value)
     }
     fun onRepoChanged(repo: String) {
-        isRepoValid.value = (Utils.isRepositoryValid(repo))
+        isRepoValid.value = (Utils.validateUrl(repo))
     }
 }
