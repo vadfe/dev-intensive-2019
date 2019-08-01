@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.repositories.PreferencesRepository
+import ru.skillbranch.devintensive.utils.Utils
 
 class ProfileViewModel : ViewModel(){
     private val repository:PreferencesRepository = PreferencesRepository
@@ -37,6 +38,8 @@ class ProfileViewModel : ViewModel(){
     fun getTheme():LiveData<Int> = appTheme
 
     fun saveProfileData(profile:Profile){
+        if(!Utils.url_validator(profile.repository))
+            profile.repository = ""
         repository.saveProfile(profile)
         profileData.value = profile
     }

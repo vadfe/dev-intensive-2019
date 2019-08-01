@@ -228,8 +228,10 @@
         <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/profile_hint_repository" style="@style/Profile.EditText.Single"
-                android:id="@+id/et_repository"/>
+                android:hint="@string/profile_hint_repository"
+                style="@style/Profile.EditText.Single"
+                android:id="@+id/et_repository"
+                android:maxLines="1"/>
     </com.google.android.material.textfield.TextInputLayout>
     <ImageView
             android:layout_width="@dimen/btn_round_size_40"

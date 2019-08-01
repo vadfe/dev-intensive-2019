@@ -42,7 +42,7 @@ class ProfileActivity: AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState?.putBoolean(IS_EDIT_MODE,isEditMode)
+        outState.putBoolean(IS_EDIT_MODE,isEditMode)
         Log.d("M_ProfileActivity", "onSaveInstanceState IS_EDIT_MODE="+isEditMode)
 
     }
@@ -81,7 +81,7 @@ class ProfileActivity: AppCompatActivity() {
             "repository" to et_repository,
             "rating" to tv_rating,
             "respect" to tv_respect
-        )!!
+        )
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         Log.d("M_ProfileActivity", "initViews IS_EDIT_MODE="+isEditMode)
         showCurrentMode(isEditMode)
@@ -89,7 +89,7 @@ class ProfileActivity: AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
             override fun afterTextChanged(s: Editable?) {
-                viewModel.setRepositoryState(!Utils.isRepositoryValid(s.toString()))
+                viewModel.setRepositoryState(!Utils.url_validator(s.toString()))
             }
         })
         btn_edit.setOnClickListener {
