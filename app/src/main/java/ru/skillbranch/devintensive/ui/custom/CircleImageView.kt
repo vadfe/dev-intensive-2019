@@ -67,13 +67,14 @@ class CircleImageView(
             RoundedBitmapDrawableFactory.create(resources, bitmap).also { it.isCircular = true }
 
     override fun getDrawable(): Drawable {
-        return originalDrawable ?: super.getDrawable()
+        return super.getDrawable()
     }
 
     fun generateAvatar(text: String?) {
         if (originalDrawable == null || text != this.text) {
             defaultAvatar = if (text == null) generateDefaultAvatar()
             else generateTextAvatar(text)
+            super.setImageDrawable(BitmapDrawable(resources,defaultAvatar))
         }
         this.text = text
         invalidate()

@@ -27,7 +27,7 @@ object Utils {
         val firstName = parts?.getOrNull(0)
         val lastName = parts?.getOrNull(1)
         return Pair(if((firstName == null) || (firstName.length == 0))null else firstName ,
-            if((lastName == null) || (lastName.length == 0))null else lastName)
+                if((lastName == null) || (lastName.length == 0))null else lastName)
     }
 
     fun toInitials(firstName: String?, lastName:String?):String?{
@@ -45,18 +45,18 @@ object Utils {
         if (ln != null)
             if(res!= null)
                 res += ln.substring(0,1).toUpperCase()
-        else
+            else
                 res = ln.substring(0,1).toUpperCase()
 
         return res
     }
 
     fun toNickName(firstName: String?, lastName:String?):String{
-        var nickName:String =  Utils.transliteration(firstName+" "+lastName,"_")
-            if(firstName.toString().isNullOrEmpty())
-                nickName = nickName.replace("_","")
-            if(lastName.toString().isNullOrEmpty())
-                nickName = nickName.replace("_","")
+        var nickName:String =  transliteration(firstName+" "+lastName,"_")
+        if(firstName.isNullOrEmpty())
+            nickName = nickName.replace("_","")
+        if(lastName.isNullOrEmpty())
+            nickName = nickName.replace("_","")
 
         return nickName
     }
@@ -68,16 +68,16 @@ object Utils {
             if(rus.indexOf(r) > -1)
                 res += en.get(rus.indexOf(r))
             else
-            if(rus_up.indexOf(r) > -1)
-                res += en_up.get(rus_up.indexOf(r))
-            else
-                res += r
+                if(rus_up.indexOf(r) > -1)
+                    res += en_up.get(rus_up.indexOf(r))
+                else
+                    res += r
 
         }
         return res.replace(" ", divider)
     }
 
-    fun url_validator(_url:String):Boolean{
+    fun url_validator(_url:String?):Boolean{
         if(_url.isNullOrEmpty()) return true
         val  exept_word = setOf(
                 "enterprise",
@@ -100,7 +100,7 @@ object Utils {
                     return false
         }
         val lRegex = with(StringBuilder()){
-            append("^((https://github.com)?|(https://www.github.com)|(github.com)|(www.github.com))/[-a-zA-Z0-9]{1,}$")
+            append("^((https://github.com)?|(https://www.github.com)|(github.com)|(www.github.com))/[a-zA-Z0-9_]{1,}$")
         }.toString()
         val p = Pattern.compile(lRegex)
         val m = p.matcher(_url)

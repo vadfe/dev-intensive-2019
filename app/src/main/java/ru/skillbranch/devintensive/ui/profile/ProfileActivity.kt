@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.profile
 
+import android.graphics.Bitmap
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -13,15 +14,14 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile_constraint.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
 import ru.skillbranch.devintensive.utils.Utils
-import ru.skillbranch.devintensive.utils.Utils.url_validator
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
-import java.util.regex.Pattern
 
 class ProfileActivity: AppCompatActivity() {
     companion object{
@@ -37,12 +37,12 @@ class ProfileActivity: AppCompatActivity() {
         setContentView(R.layout.activity_profile_constraint)
         initViews(savedInstanceState)
         initViewModel()
-         Log.d("M_ProfileActivity", "onCreate")
+        Log.d("M_ProfileActivity", "onCreate")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState?.putBoolean(IS_EDIT_MODE,isEditMode)
+        outState.putBoolean(IS_EDIT_MODE,isEditMode)
         Log.d("M_ProfileActivity", "onSaveInstanceState IS_EDIT_MODE="+isEditMode)
 
     }
@@ -58,7 +58,7 @@ class ProfileActivity: AppCompatActivity() {
         wr_repository.error = if (isError) "Невалидный адрес репозитория" else null
     }
     private fun updateTheme(mode: Int) {
-         Log.d("M_ProfileActivity", "updateTheme")
+        Log.d("M_ProfileActivity", "updateTheme")
         delegate.setLocalNightMode(mode)
     }
 
@@ -73,15 +73,15 @@ class ProfileActivity: AppCompatActivity() {
 
     private fun initViews(savedInstanceState: Bundle?){
         viewFields = mapOf(
-            "nickName" to tv_nick_name,
-            "rank" to tv_rank,
-            "firstName" to et_first_name,
-            "lastName" to et_last_name,
-            "about" to et_about,
-            "repository" to et_repository,
-            "rating" to tv_rating,
-            "respect" to tv_respect
-        )!!
+                "nickName" to tv_nick_name,
+                "rank" to tv_rank,
+                "firstName" to et_first_name,
+                "lastName" to et_last_name,
+                "about" to et_about,
+                "repository" to et_repository,
+                "rating" to tv_rating,
+                "respect" to tv_respect
+        )
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         Log.d("M_ProfileActivity", "initViews IS_EDIT_MODE="+isEditMode)
         showCurrentMode(isEditMode)
@@ -89,7 +89,7 @@ class ProfileActivity: AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
             override fun afterTextChanged(s: Editable?) {
-                viewModel.setRepositoryState(!Utils.isRepositoryValid(s.toString()))
+                viewModel.setRepositoryState(!Utils.url_validator(s.toString()))
             }
         })
         btn_edit.setOnClickListener {
@@ -123,7 +123,7 @@ class ProfileActivity: AppCompatActivity() {
         with(btn_edit){
             val filter: ColorFilter? = if(isEdtit){
                 PorterDuffColorFilter(resources.getColor(R.color.color_accent, theme),
-                    PorterDuff.Mode.SRC_IN)
+                        PorterDuff.Mode.SRC_IN)
             }else{
                 null
             }
@@ -140,10 +140,10 @@ class ProfileActivity: AppCompatActivity() {
 
     private fun saveProfileInfo(){
         Profile(
-            firstName = et_first_name.text.toString(),
-            lastName = et_last_name.text.toString(),
-            about = et_about.text.toString(),
-            repository = et_repository.text.toString()
+                firstName = et_first_name.text.toString(),
+                lastName = et_last_name.text.toString(),
+                about = et_about.text.toString(),
+                repository = et_repository.text.toString()
         ).apply { viewModel.saveProfileData(this) }
     }
 }
