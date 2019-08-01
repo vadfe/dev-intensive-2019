@@ -14,7 +14,7 @@ class ProfileViewModel : ViewModel(){
     private val profileData = MutableLiveData<Profile>()
     private val appTheme = MutableLiveData<Int>()
     private val repositoryState = MutableLiveData<Boolean>()
-
+    private var isRepoValid = MutableLiveData<Boolean>()
     init {
         Log.d("M_ProfileViewModel", "init view model")
         profileData.value = repository.getProfile()
@@ -34,12 +34,12 @@ class ProfileViewModel : ViewModel(){
 
     fun getProfileData():LiveData<Profile> = profileData
 
+    fun getRepoStatus():LiveData<Boolean> = isRepoValid
 
     fun getTheme():LiveData<Int> = appTheme
 
     fun saveProfileData(profile:Profile){
-        if(!Utils.url_validator(profile.repository))
-            profile.repository = ""
+        if(isRepoValid.value == false) profile.repository = ""
         repository.saveProfile(profile)
         profileData.value = profile
     }
@@ -52,5 +52,8 @@ class ProfileViewModel : ViewModel(){
         }
         repository.saveAppTheme(appTheme.value!!)
         Log.d("M_ProfileViewModel", "swithTheme "+appTheme.value)
+    }
+    fun onRepoChanged(repo: String) {
+        isRepoValid.value = (Utils.isRepositoryValid(repo))
     }
 }

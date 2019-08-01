@@ -51,11 +51,19 @@ class ProfileActivity: AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer { updateUI(it) })
         viewModel.getTheme().observe(this, Observer { updateTheme(it) })
-        viewModel.getRepositoryState().observe(this, Observer { updateRepository(it) })
+        viewModel.getRepoStatus().observe(this, Observer { checkRepoStatus(it) })
     }
-    private fun updateRepository(isError: Boolean) {
-        wr_repository.isErrorEnabled = isError
-        wr_repository.error = if (isError) "Невалидный адрес репозитория" else null
+    private fun checkRepoStatus(isRepoValid: Boolean) {
+        if (!isRepoValid) {
+            wr_repository.error = resources.getString(R.string.error_message)
+            wr_repository.isErrorEnabled = true
+
+        } else {
+            wr_repository.isErrorEnabled = false
+            wr_repository.error = null
+        }
+
+
     }
     private fun updateTheme(mode: Int) {
         Log.d("M_ProfileActivity", "updateTheme")
@@ -68,8 +76,12 @@ class ProfileActivity: AppCompatActivity() {
                 v.text = it[k].toString()
             }
         }
-        iv_avatar.generateAvatar(Utils.toInitials(et_first_name.text.toString(),et_last_name.text.toString()))
+        val initials = Utils.toInitials(profile.firstName, profile.lastName)
+        if (initials != null)
+        iv_avatar.generateAvatar(initials)
     }
+
+
 
     private fun initViews(savedInstanceState: Bundle?){
         viewFields = mapOf(
@@ -85,13 +97,7 @@ class ProfileActivity: AppCompatActivity() {
         isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
         Log.d("M_ProfileActivity", "initViews IS_EDIT_MODE="+isEditMode)
         showCurrentMode(isEditMode)
-        et_repository.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-            override fun afterTextChanged(s: Editable?) {
-                viewModel.setRepositoryState(!Utils.url_validator(s.toString()))
-            }
-        })
+        addRepoListener()
         btn_edit.setOnClickListener {
             if (wr_repository.isErrorEnabled) {
                 et_repository.text?.clear()
@@ -105,6 +111,17 @@ class ProfileActivity: AppCompatActivity() {
         btn_switch_theme.setOnClickListener{
             viewModel.swithTheme()
         }
+
+    }
+
+    private fun addRepoListener() {
+        et_repository.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.onRepoChanged(s.toString())
+            }
+        })
 
     }
 
