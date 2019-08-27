@@ -24,7 +24,7 @@ fun Activity.isKeyboardOpen():Boolean{
     val r = Rect()
     view.getRootView().getWindowVisibleDisplayFrame(r)
     val screenHeight = view.getRootView().getHeight()
-    val heightDifference = screenHeight - (r.bottom - r.top)
+    val heightDifference = screenHeight.minus((r.bottom - r.top))
     return if(heightDifference > (screenHeight / 3)) true else false
 }
 

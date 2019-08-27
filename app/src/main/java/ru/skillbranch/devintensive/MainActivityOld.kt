@@ -3,23 +3,20 @@ package ru.skillbranch.devintensive
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_old.*
 import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Bender
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView.OnEditorActionListener
 import ru.skillbranch.devintensive.extensions.isKeyboardOpen
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener{
+class MainActivityOld : AppCompatActivity(), View.OnClickListener{
     lateinit var benderImage: ImageView
     lateinit var textTxt: TextView
     lateinit var messageEt: EditText
@@ -29,7 +26,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_old)
         benderImage = iv_bender
         textTxt = tv_text
         messageEt = et_message
@@ -45,7 +42,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
 
         textTxt.text = benderObj.ascQuestion()
-        messageEt.setOnEditorActionListener { v, actionId, event ->
+        messageEt.setOnEditorActionListener { _, actionId, _ ->
             if(actionId == EditorInfo.IME_ACTION_DONE){
                 sendTxt()
                 true
