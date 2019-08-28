@@ -17,18 +17,18 @@ data class Chat(
 ) {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun unreadableMessageCount(): Int {
-        //TODO implement me
+        return 0
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageDate(): Date? {
-        //TODO implement me
+        return Date()
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun lastMessageShort(): Pair<String, String?> = when(val lastMessage = messages.lastOrNull()){
-       //TODO implement me
-    }
+    fun lastMessageShort(): Pair<String, String?> = "dfdfd" to "ghghgh" /*when(val lastMessage = messages.lastOrNull()){
+       return "сообщений еще нет"
+    }*/
 
     private fun isSingle(): Boolean = members.size == 1
 
