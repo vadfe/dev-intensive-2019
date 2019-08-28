@@ -1,4 +1,4 @@
-package ru.skillbranch.devintensive.models
+package ru.skillbranch.devintensive.models.data
 
 
 import ru.skillbranch.devintensive.utils.Utils
@@ -44,10 +44,10 @@ data class User(
 
     companion object Factory{
         private var lastId : Int = -1
-        fun makeUser(fullName:String?) : User{
-            lastId ++
+        fun makeUser(fullName:String?) : User {
+            lastId++
             val (firstName, lastName) = Utils.parseFullName(fullName)
-            return User(id = "$lastId", firstName=firstName, lastName=lastName)
+            return User(id = "$lastId", firstName = firstName, lastName = lastName)
         }
     }
 
@@ -77,9 +77,9 @@ data class User(
         fun lastVisit(lastVisit: Date) = apply { this.lastVisit = lastVisit }
         fun isOnline(isOnline: Boolean) = apply { this.isOnline = isOnline }
         fun build(): User {
-            return User(id=this.id, firstName=this.firstName, lastName=this.lastName,
-                avatar=this.avatar, rating=this.rating, respect=this.respect,
-                lastVisit=this.lastVisit, isOnline=this.isOnline)
+            return User(id = this.id, firstName = this.firstName, lastName = this.lastName,
+                    avatar = this.avatar, rating = this.rating, respect = this.respect,
+                    lastVisit = this.lastVisit, isOnline = this.isOnline)
         }
     }
 }
