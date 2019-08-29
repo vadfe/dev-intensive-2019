@@ -26,7 +26,10 @@ data class Chat(
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun lastMessageShort(): Pair<String, String?> =  "" to "сообщений еще нет" //when(val lastMessage = messages.lastOrNull())
+    fun lastMessageShort(): Pair<String?, String> =  when(val lastMessage = messages.lastOrNull()){
+        null -> "сообщений еще нет" to ""
+        else -> "последнее сообщение" to lastMessage.date.shortFormat()
+    }
 
 
     private fun isSingle(): Boolean = members.size == 1

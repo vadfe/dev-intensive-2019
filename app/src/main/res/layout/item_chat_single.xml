@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_size"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/spacing_normal_16">
+    android:padding="@dimen/spacing_normal_16"
+    android:background="@android:color/white">
 
     <ru.skillbranch.devintensive.ui.custom.CircleImageView
         android:id="@+id/iv_avatar_single"
@@ -19,33 +20,33 @@
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/tv_title_single"
         />
+
     <TextView
         android:id="@+id/tv_title_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="chat title"
-        android:textColor="@color/color_primary"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="14sp"
-        android:layout_toRightOf="@+id/iv_avatar_single"
-        android:layout_toLeftOf="@id/tv_date_sinle"
         android:layout_marginLeft="@dimen/spacing_normal_16"
         android:layout_marginRight="@dimen/spacing_normal_16"
-        />
+        android:layout_toLeftOf="@id/tv_date_sinle"
+        android:layout_toRightOf="@+id/iv_avatar_single"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/color_primary"
+        android:textSize="14sp"
+        tools:text="chat title" />
+
     <TextView
         android:id="@+id/tv_message_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="это содержимое сообщения"
-        android:textColor="@color/color_gray"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="14sp"
-        android:layout_toRightOf="@+id/iv_avatar_single"
-        android:layout_toLeftOf="@id/tv_counter_sinle"
+        android:layout_below="@id/tv_title_single"
         android:layout_marginLeft="@dimen/spacing_normal_16"
         android:layout_marginRight="@dimen/spacing_normal_16"
-        android:layout_below="@id/tv_title_single"
-        />
+        android:layout_toLeftOf="@id/tv_counter_sinle"
+        android:layout_toRightOf="@+id/iv_avatar_single"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/color_gray_dark"
+        android:textSize="14sp"
+        tools:text="это содержимое сообщения" />
 
     <TextView
         android:id="@+id/tv_date_sinle"
