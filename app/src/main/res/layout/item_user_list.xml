@@ -23,6 +23,7 @@
         android:layout_toRightOf="@id/iv_selected"
         android:src="@drawable/avatarface" />
     <View
+        android:id="@+id/sv_us_indicator"
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:background="@drawable/bg_indicator"
