@@ -13,17 +13,17 @@ import kotlinx.android.synthetic.main.item_user_list.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.UserItem
 
-class UserAdapter( val listener:(UserItem) -> Unit) :RecyclerView.Adapter<UserAdapter.UserViewHiolder>() {
+class UserAdapter( val listener:(UserItem) -> Unit) :RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     var items: List<UserItem> = listOf()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHiolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val convertView = inflater.inflate(R.layout.item_user_list,parent,false)
-        return UserViewHiolder(convertView)
+        return UserViewHolder(convertView)
     }
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: UserViewHiolder, position: Int) = holder.bind(items[position], listener)
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) = holder.bind(items[position], listener)
 
     fun updateData(data: List<UserItem>){
         val diffCallback = object : DiffUtil.Callback(){
@@ -42,7 +42,7 @@ class UserAdapter( val listener:(UserItem) -> Unit) :RecyclerView.Adapter<UserAd
         diffResult.dispatchUpdatesTo(this)
     }
 
-    inner class UserViewHiolder(convertView: View):RecyclerView.ViewHolder(convertView), LayoutContainer {
+    inner class UserViewHolder(convertView: View):RecyclerView.ViewHolder(convertView), LayoutContainer {
         override val containerView: View?
             get() = itemView
 
