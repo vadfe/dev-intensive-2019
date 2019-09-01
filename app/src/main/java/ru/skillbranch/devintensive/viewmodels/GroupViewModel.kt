@@ -37,6 +37,7 @@ class GroupViewModel : ViewModel() {
     }
 
     private fun loadUsers(): List<UserItem> = groupRepository.loadUsers().map{it.toUserItem()}
+
     fun handleRemoveChip(userId: String) {
         userItems.value = userItems.value!!.map {
             if(it.id == userId) it.copy(isSelected = false)
