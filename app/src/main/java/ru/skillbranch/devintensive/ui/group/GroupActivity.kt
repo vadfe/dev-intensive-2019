@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.children
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -37,6 +38,20 @@ class GroupActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_search, menu)
+        val searchItem = menu?.findItem(R.id.action_search)
+        val searchWiew = searchItem?.actionView as SearchView
+        searchWiew.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.handleSearchQuery(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.handleSearchQuery(newText)
+                return true
+            }
+
+        })
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -52,12 +67,25 @@ class GroupActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@GroupActivity)
             addItemDecoration(divider)
         }
+        fab_ga.setOnClickListener{
+            viewModel.handleCreateGroup()
+            finish()
+            overridePendingTransition(R.anim.idle, R.anim.bottom_down)
+        }
     }
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(GroupViewModel::class.java)
         viewModel.getUserData().observe(this, Observer { usersAdapter.updateData(it) })
-        viewModel.getSelectedData().observe(this, Observer { updateChips(it) })
+        viewModel.getSelectedData().observe(this, Observer {
+            updateChips(it)
+            toogleFab(it.size>1)
+        })
+    }
+
+    private fun toogleFab(isShow: Boolean) {
+        if(isShow) fab_ga.show()
+        else fab_ga.hide()
     }
 
     private fun addChipToGroup(user:UserItem){
