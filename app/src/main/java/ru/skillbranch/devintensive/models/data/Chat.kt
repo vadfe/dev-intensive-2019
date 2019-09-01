@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive.models.data
 
 import androidx.annotation.VisibleForTesting
+import org.w3c.dom.Text
 import ru.skillbranch.devintensive.extensions.shortFormat
 import ru.skillbranch.devintensive.models.BaseMessage
 import ru.skillbranch.devintensive.models.ImageMessage
@@ -27,8 +28,15 @@ data class Chat(
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageShort(): Pair<String?, String> =  when(val lastMessage = messages.lastOrNull()){
+
         null -> "сообщений еще нет" to ""
-        else -> "последнее сообщение" to lastMessage.date.shortFormat()
+        else -> {
+            if(messages == TextMessage) {
+                "последнее сообщение" to lastMessage.date.shortFormat()
+            } else{
+                "последнее сообщение" to lastMessage.date.shortFormat()
+            }
+        }
     }
 
 
