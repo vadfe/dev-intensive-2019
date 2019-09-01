@@ -7,6 +7,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.extensions.shortFormat
+import ru.skillbranch.devintensive.models.data.Chat
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.models.data.UserItem
@@ -16,15 +17,44 @@ import ru.skillbranch.devintensive.utils.DataGenerator
 class MainViewModel: ViewModel() {
     private val query = mutableLiveData("")
     private val chatRepository = ChatRepository
-    private val chats = Transformations.map(chatRepository.loadChats()){chats ->
+    private val chats = Transformations.map(chatRepository.loadChats()) { chats ->
+        val archived = chats.filter { it.isArchived }
+        if(archived.isEmpty()) {
+            return@map chats.map { it.toChatItem() }
+        } else {
+            val listWithArchive = mutableListOf<ChatItem>()
+            listWithArchive.add(0, makeArchiveItem(archived))
+            listWithArchive.addAll((chats.filter { !it.isArchived }.map { it.toChatItem() }))
+            return@map listWithArchive
+        }
+    }
+    /*private val chats = Transformations.map(chatRepository.loadChats()){chats ->
         val caa = chats.filter { !it.isArchived }
             .filter { it.title.contains(query.value!!, true)}
             .map { it.toChatItem() }
             .sortedBy { it.id.toInt() }
 
         return@map caa
+    }*/
+    private fun makeArchiveItem(archived : List<Chat>) : ChatItem {
+        val count = archived.fold(0) { acc, chat -> acc + chat.unreadableMessageCount() }
+
+        val lastChat: Chat = if (archived.none { it.unreadableMessageCount() != 0 }) archived.last() else
+            archived.filter { it.unreadableMessageCount() != 0 }.maxBy { it.lastMessageDate()!! }!!
+
+        return ChatItem(
+            "-1",
+            null,
+            "",
+            "Архив чатов",
+            lastChat.lastMessageShort().first,
+            count,
+            lastChat.lastMessageDate()?.shortFormat(),
+            false,
+            ChatType.ARCHIVE,
+            lastChat.lastMessageShort().second
+        )
     }
-    private val chats_archive = chatRepository.archive()
     fun getChatData(): LiveData<List<ChatItem>> {
         //>>> add filter
         val  result = MediatorLiveData<List<ChatItem>>()

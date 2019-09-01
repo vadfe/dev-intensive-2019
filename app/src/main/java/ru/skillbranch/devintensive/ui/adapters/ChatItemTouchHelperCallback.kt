@@ -20,7 +20,8 @@ class ChatItemTouchHelperCallback(
     private val iconBounds = Rect()
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-        return if(viewHolder is  ItemTouchViewHolder){
+        val id = adapter.items[viewHolder.adapterPosition].id
+        return if(viewHolder is  ItemTouchViewHolder && id != "-1"){
             makeFlag(ItemTouchHelper.ACTION_STATE_SWIPE, ItemTouchHelper.START)
         }else{
             makeFlag(ItemTouchHelper.ACTION_STATE_IDLE, ItemTouchHelper.START)
