@@ -28,13 +28,12 @@ data class Chat(
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageShort(): Pair<String?, String> =  when(val lastMessage = messages.lastOrNull()){
-
         null -> "сообщений еще нет" to ""
         else -> {
-            if(messages == TextMessage) {
-                "последнее сообщение" to lastMessage.date.shortFormat()
+            if(lastMessage is TextMessage) {
+                lastMessage.text to lastMessage.from.firstName.toString()
             } else{
-                "последнее сообщение" to lastMessage.date.shortFormat()
+                "${lastMessage.from.firstName} - отправил фото" to lastMessage.from.firstName.toString()
             }
         }
     }
