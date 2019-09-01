@@ -3,6 +3,7 @@ package ru.skillbranch.devintensive.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,6 +19,9 @@ import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.adapters.ItemTouchViewHolder
 import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
+
+
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var chatAdapter: ChatAdapter
@@ -43,7 +47,11 @@ class MainActivity : AppCompatActivity() {
 
         val touchCallback = ChatItemTouchHelperCallback(chatAdapter){
             viewModel.addToArchive(it.id)
-            Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_SHORT).show()
+            val itid = it.id
+            Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_SHORT)
+            .setAction("Отмена",  { viewModel.restoreFromArchive(itid) })
+            .show()
+
         }
 
         val touchHelper = ItemTouchHelper(touchCallback)

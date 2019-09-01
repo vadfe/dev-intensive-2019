@@ -27,7 +27,6 @@ class ChatAdapter(val listener: (ChatItem) -> Unit) : RecyclerView.Adapter<ChatA
         ChatType.ARCHIVE -> ARCHIVE_TYPE
         ChatType.SINGLE -> SINGLE_TYPE
         ChatType.GROUP -> GROUP_TYPE
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatItemViewHolder {
@@ -44,8 +43,6 @@ class ChatAdapter(val listener: (ChatItem) -> Unit) : RecyclerView.Adapter<ChatA
     }
 
     override fun getItemCount(): Int = items.size
-
-
 
     override fun onBindViewHolder(holder: ChatItemViewHolder, position: Int) {
         holder.bind(items[position], listener)

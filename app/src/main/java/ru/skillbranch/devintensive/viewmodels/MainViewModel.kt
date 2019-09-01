@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.viewmodels
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -34,6 +35,7 @@ class MainViewModel: ViewModel() {
         chats.value = copy.sortedBy { it.id.toInt() }
     }
 */
+
     fun addToArchive(chatId: String) {
         val chat = chatRepository.find(chatId)
         chat ?: return
