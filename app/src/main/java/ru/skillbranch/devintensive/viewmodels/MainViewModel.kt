@@ -2,10 +2,12 @@ package ru.skillbranch.devintensive.viewmodels
 
 import android.view.View
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import ru.skillbranch.devintensive.extensions.mutableLiveData
 import ru.skillbranch.devintensive.models.data.ChatItem
+import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.repositories.ChatRepository
 import ru.skillbranch.devintensive.utils.DataGenerator
 
@@ -13,30 +15,25 @@ class MainViewModel: ViewModel() {
     private val query = mutableLiveData("")
     private val chatRepository = ChatRepository
     private val chats = Transformations.map(chatRepository.loadChats()){chats ->
-
         return@map chats.filter { !it.isArchived }
+            .filter { it.title.contains(query.value!!, true)}
             .map { it.toChatItem() }
             .sortedBy { it.id.toInt() }
     }
     fun getChatData(): LiveData<List<ChatItem>> {
-        return chats
+        //>>> add filter
+        val  result = MediatorLiveData<List<ChatItem>>()
+        val filterF = {
+            val queryStr = query.value!!
+            val users_t = chats.value!!
+            result.value = if(queryStr.isEmpty()) users_t
+            else users_t.filter{ it.title.contains(queryStr, true) }
+        }
+        result.addSource(chats){filterF.invoke()}
+        result.addSource(query){filterF.invoke()}
+        ///<<<
+        return result
     }
-/*
-    private fun loadChat():List<ChatItem>{
-        val chats = chatRepository.loadChats()
-        return chats.map {it.toChatItem()}
-                .sortedBy { it.id.toInt() }
-    }
-*/
-    /*
-    fun addItems() {
-        val newItem = DataGenerator.generateChatsWithOffset(chats.value!!.size, 5).map { it.toChatItem() }
-        val copy = chats.value!!.toMutableList()
-        copy.addAll(newItem)
-        chats.value = copy.sortedBy { it.id.toInt() }
-    }
-*/
-
     fun addToArchive(chatId: String) {
         val chat = chatRepository.find(chatId)
         chat ?: return

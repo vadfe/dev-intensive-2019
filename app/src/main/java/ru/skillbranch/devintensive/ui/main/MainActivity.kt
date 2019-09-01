@@ -3,6 +3,7 @@ package ru.skillbranch.devintensive.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.widget.SearchView
@@ -72,7 +73,8 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_SHORT)
             .setAction("Отмена",  { viewModel.restoreFromArchive(itid) })
             .show()
-
+             Log.d("M_MainActivity", "Вы точно хотите добавить Katherine Barnes в архив?")
+             Log.d("M_MainActivity", "Вы точно хотите добавить ${it.title} в архив?")
         }
 
         val touchHelper = ItemTouchHelper(touchCallback)
