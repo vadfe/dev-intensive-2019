@@ -28,7 +28,7 @@ class GroupActivity : AppCompatActivity() {
 
     private lateinit var usersAdapter: UserAdapter
     private lateinit var viewModel: GroupViewModel
-
+    private lateinit var fab:com.google.android.material.floatingactionbutton.FloatingActionButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group)
@@ -73,6 +73,7 @@ class GroupActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        fab = findViewById(R.id.fab)
         usersAdapter = UserAdapter { viewModel.handleSelectedItem(it.id) }
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         with(rv_user_list){
@@ -80,7 +81,7 @@ class GroupActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@GroupActivity)
             addItemDecoration(divider)
         }
-        fab_ga.setOnClickListener{
+        fab.setOnClickListener{
             viewModel.handleCreateGroup()
             finish()
             overridePendingTransition(R.anim.idle, R.anim.bottom_down)
@@ -97,8 +98,8 @@ class GroupActivity : AppCompatActivity() {
     }
 
     private fun toogleFab(isShow: Boolean) {
-        if(isShow) fab_ga.show()
-        else fab_ga.hide()
+        if(isShow) fab.show()
+        else fab.hide()
     }
 
     private fun addChipToGroup(user:UserItem){
