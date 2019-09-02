@@ -97,12 +97,12 @@ class ChatAdapter(val listener: (ChatItem) -> Unit) : RecyclerView.Adapter<ChatA
                         .into(iv_avatar_single)
             }
             sv_indicator.visibility = if(item.isOnline) View.VISIBLE else View.GONE
-            with(tv_date_sinle){
+            with(tv_date_single){
                 visibility = if(item.lastMessageDate != null) View.VISIBLE else View.GONE
                 text = item.lastMessageDate
             }
 
-            with(tv_counter_sinle){
+            with(tv_counter_single){
                 visibility = if(item.messageCount > 0) View.VISIBLE else View.GONE
                 text = item.messageCount.toString()
             }

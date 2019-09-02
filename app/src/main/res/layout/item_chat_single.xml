@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spacing_normal_16"
         android:layout_marginRight="@dimen/spacing_normal_16"
-        android:layout_toLeftOf="@id/tv_date_sinle"
+        android:layout_toLeftOf="@id/tv_date_single"
         android:layout_toRightOf="@+id/iv_avatar_single"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/color_primary"
@@ -41,7 +41,7 @@
         android:layout_below="@id/tv_title_single"
         android:layout_marginLeft="@dimen/spacing_normal_16"
         android:layout_marginRight="@dimen/spacing_normal_16"
-        android:layout_toLeftOf="@id/tv_counter_sinle"
+        android:layout_toLeftOf="@id/tv_counter_single"
         android:layout_toRightOf="@+id/iv_avatar_single"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/color_gray_dark"
@@ -49,7 +49,7 @@
         tools:text="это содержимое сообщения" />
 
     <TextView
-        android:id="@+id/tv_date_sinle"
+        android:id="@+id/tv_date_single"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
@@ -58,7 +58,7 @@
         android:textColor="@color/color_gray_dark"
         tools:text="18:00"/>
     <TextView
-        android:id="@+id/tv_counter_sinle"
+        android:id="@+id/tv_counter_single"
         android:layout_width="wrap_content"
         android:minWidth="@dimen/counter_size"
         android:layout_height="@dimen/counter_size"
