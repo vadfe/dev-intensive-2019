@@ -28,14 +28,6 @@ class MainViewModel: ViewModel() {
             return@map listWithArchive
         }
     }
-    /*private val chats = Transformations.map(chatRepository.loadChats()){chats ->
-        val caa = chats.filter { !it.isArchived }
-            .filter { it.title.contains(query.value!!, true)}
-            .map { it.toChatItem() }
-            .sortedBy { it.id.toInt() }
-
-        return@map caa
-    }*/
     private fun makeArchiveItem(archived : List<Chat>) : ChatItem {
         val count = archived.fold(0) { acc, chat -> acc + chat.unreadableMessageCount() }
 

@@ -19,6 +19,7 @@ data class Chat(
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun unreadableMessageCount(): Int {
         return messages.filter { it.isReaded == false }.size
+        //return messages.size
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -31,9 +32,9 @@ data class Chat(
         null -> "сообщений еще нет" to ""
         else -> {
             if(lastMessage is TextMessage) {
-                lastMessage.text to lastMessage.from.firstName.toString()
+                lastMessage.text to "@${lastMessage.from.firstName.toString()}"
             } else{
-                "${lastMessage.from.firstName} - отправил фото" to lastMessage.from.firstName.toString()
+                "${lastMessage.from.firstName} - отправил фото" to "@${lastMessage.from.firstName.toString()}"
             }
         }
     }
