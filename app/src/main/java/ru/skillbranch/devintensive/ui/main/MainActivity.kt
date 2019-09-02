@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.rv_chat_list
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.adapters.ItemTouchViewHolder
@@ -64,8 +65,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         chatAdapter = ChatAdapter{
-            val intent = Intent(this,ArchiveActivity::class.java)
-            startActivity(intent)
+            if(it.chatType == ChatType.ARCHIVE){
+                val intent = Intent(this, ArchiveActivity::class.java)
+                startActivity(intent)
+            }else {
+                Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_SHORT).show()
+            }
         }
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
 
