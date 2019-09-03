@@ -98,6 +98,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,GroupActivity::class.java)
             startActivity(intent)
         }
+
+        delegate.setLocalNightMode(1)
     }
 
     private fun initViewModel() {
