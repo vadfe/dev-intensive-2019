@@ -23,4 +23,5 @@
     <color name="color_swipe_fone">#1C0E42</color>
     <color name="color_wr_icon_fone">#9CA9BA</color>
     <color name="color_chip_bg">#473770</color>
+    <color name="color_indicator_bg">#4FD149</color>
 </resources>

@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-       // delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        //delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 
     private fun initViewModel() {
