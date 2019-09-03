@@ -4,7 +4,7 @@
     android:layout_height="@dimen/item_size"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="@dimen/spacing_normal_16"
-    android:background="@android:color/white">
+    android:background="@color/color_item_chat_bg">
 
     <ru.skillbranch.devintensive.ui.custom.CircleImageView
         android:id="@+id/iv_avatar_single"
@@ -30,7 +30,7 @@
         android:layout_toLeftOf="@id/tv_date_single"
         android:layout_toRightOf="@+id/iv_avatar_single"
         android:fontFamily="sans-serif-medium"
-        android:textColor="@color/color_primary"
+        android:textColor="@color/color_title_single"
         android:textSize="14sp"
         tools:text="chat title" />
 
@@ -44,7 +44,7 @@
         android:layout_toLeftOf="@id/tv_counter_single"
         android:layout_toRightOf="@+id/iv_avatar_single"
         android:fontFamily="sans-serif-medium"
-        android:textColor="@color/color_gray_dark"
+        android:textColor="@color/color_message_single"
         android:textSize="14sp"
         tools:text="это содержимое сообщения" />
 

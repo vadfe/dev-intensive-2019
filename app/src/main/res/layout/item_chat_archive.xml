@@ -4,10 +4,10 @@
     android:layout_height="@dimen/item_size"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="@dimen/spacing_normal_16"
-    android:background="@android:color/white">
+    android:background="@color/color_item_chat_bg">
 
     <ImageView
-        android:id="@+id/iv_avatar_single"
+        android:id="@+id/iv_avatar_archive"
         android:layout_width="@dimen/avatar_item_size"
         android:layout_height="@dimen/avatar_item_size"
         android:layout_alignParentLeft="true"
@@ -28,37 +28,39 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spacing_normal_16"
         android:layout_marginRight="@dimen/spacing_normal_16"
-        android:layout_toRightOf="@+id/iv_avatar_single"
+        android:layout_toRightOf="@+id/iv_avatar_archive"
         android:fontFamily="sans-serif-medium"
-        android:textColor="@color/color_primary"
+        android:textColor="@color/color_title_single"
         android:textSize="14sp"
         android:text="Архив чатов" />
 
     <TextView
-            android:id="@+id/tv_message_author_archive"
+        android:id="@+id/tv_message_author_archive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title_archive"
         android:layout_marginLeft="@dimen/spacing_normal_16"
-        android:layout_marginRight="@dimen/spacing_normal_16"
-        android:layout_toRightOf="@+id/tv_title_archive"
-        android:layout_toLeftOf="@id/tv_date_archive"
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@+id/iv_avatar_archive"
         android:fontFamily="sans-serif-medium"
-        android:textColor="@color/color_gray_dark"
+        android:textColor="@color/color_title_single"
         android:textSize="14sp"
-        tools:text="Имя автора " />
+        tools:text="Имя автора" />
+
     <TextView
-            android:id="@+id/tv_message_archive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_title_archive"
-            android:layout_marginLeft="@dimen/spacing_normal_16"
-            android:layout_marginRight="@dimen/spacing_normal_16"
-            android:layout_toRightOf="@+id/iv_avatar_single"
-            android:layout_toLeftOf="@+id/tv_counter_sinle"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="@color/color_gray_dark"
-            android:textSize="14sp"
-            tools:text="Текст последнего сообщения" />
+        android:id="@+id/tv_message_archive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title_archive"
+        android:layout_marginLeft="@dimen/spacing_normal_16"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="@dimen/spacing_normal_16"
+        android:layout_toStartOf="@+id/tv_counter_archive"
+        android:layout_toEndOf="@+id/tv_message_author_archive"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/color_message_single"
+        android:textSize="14sp"
+        tools:text="Текст последнего сообщения" />
 
     <TextView
         android:id="@+id/tv_date_archive"

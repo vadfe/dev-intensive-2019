@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        delegate.setLocalNightMode(1)
+        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 
     private fun initViewModel() {
