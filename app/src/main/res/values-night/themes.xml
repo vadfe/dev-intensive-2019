@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/color_white</item>
+        <item name="colorPrimary">@android:color/white</item>
         <item name="colorPrimaryDark">@color/color_gray_light</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="colorAccentedSurface">@color/color_divider_light</item>

@@ -30,7 +30,7 @@
         android:layout_toLeftOf="@id/tv_date_single"
         android:layout_toRightOf="@+id/iv_avatar_single"
         android:fontFamily="sans-serif-medium"
-        android:textColor="@color/color_title_single"
+            android:textColor="@color/color_title_single"
         android:textSize="14sp"
         tools:text="chat title" />
 
@@ -55,7 +55,7 @@
         android:textSize="10sp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:textColor="@color/color_gray_dark"
+        android:textColor="@color/color_tv_date_txt"
         tools:text="18:00"/>
     <TextView
         android:id="@+id/tv_counter_single"

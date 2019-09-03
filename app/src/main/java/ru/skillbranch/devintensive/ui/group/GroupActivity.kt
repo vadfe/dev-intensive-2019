@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.children
 import androidx.lifecycle.Observer
@@ -86,6 +87,7 @@ class GroupActivity : AppCompatActivity() {
             finish()
             overridePendingTransition(R.anim.idle, R.anim.bottom_down)
         }
+       // delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 
     private fun initViewModel() {
@@ -110,7 +112,7 @@ class GroupActivity : AppCompatActivity() {
             tag = user.id
             isClickable = true
             closeIconTint = ColorStateList.valueOf(Color.WHITE)
-            chipBackgroundColor = ColorStateList.valueOf(getColor(R.color.color_primary_light))
+            chipBackgroundColor = ColorStateList.valueOf(getColor(R.color.color_chip_bg))
             setTextColor(Color.WHITE)
         }
         chip.setOnCloseIconClickListener{viewModel.handleRemoveChip(it.tag.toString())}

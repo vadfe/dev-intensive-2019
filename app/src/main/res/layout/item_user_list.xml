@@ -4,7 +4,7 @@
     android:layout_height="@dimen/item_size"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="@dimen/spacing_normal_16"
-    android:background="@android:color/white">
+    android:background="@color/color_item_chat_bg">
     <ImageView
         android:id="@+id/iv_selected"
         android:layout_width="@dimen/icon_size"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         tools:text="user name"
         android:textSize="14sp"
-        android:textColor="@color/color_primary"
+        android:textColor="@color/color_title_single"
         android:fontFamily="sans-serif-medium"
         android:layout_toRightOf="@id/iv_avatar_user"
         android:layout_marginLeft="@dimen/spacing_normal_16"
@@ -50,7 +50,7 @@
         tools:text="online"
         android:textSize="14sp"
         android:layout_below="@id/tv_user_name"
-        android:textColor="@color/color_gray_dark"
+        android:textColor="@color/color_message_single"
         android:layout_toRightOf="@id/iv_avatar_user"
         android:layout_marginLeft="@dimen/spacing_normal_16"
         />

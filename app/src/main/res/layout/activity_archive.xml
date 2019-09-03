@@ -15,7 +15,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:background="@color/color_app_bar_bg">
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -25,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
-            tools:listitem="@layout/item_chat_archive" />
+            tools:listitem="@layout/item_chat_archive"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

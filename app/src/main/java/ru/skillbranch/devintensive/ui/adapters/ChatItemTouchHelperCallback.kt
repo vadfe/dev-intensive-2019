@@ -80,7 +80,7 @@ class ChatItemTouchHelperCallback(
         }
 
         with(bgPaint){
-            color = itemView.resources.getColor(R.color.color_primary_dark, itemView.context.theme)
+            color = itemView.resources.getColor(R.color.color_swipe_fone, itemView.context.theme)
         }
 
         canvas.drawRect(bgRect,bgPaint)

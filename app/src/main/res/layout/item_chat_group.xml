@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/item_size"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:padding="@dimen/spacing_normal_16"
-                android:background="@android:color/white">
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_size"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:padding="@dimen/spacing_normal_16"
+        android:background="@color/color_item_chat_bg">
 
     <ru.skillbranch.devintensive.ui.custom.CircleImageView
             android:id="@+id/iv_avatar_group"
@@ -23,7 +24,7 @@
             android:layout_toLeftOf="@id/tv_date_group"
             android:layout_toRightOf="@+id/iv_avatar_group"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/color_primary"
+            android:textColor="@color/color_title_single"
             android:textSize="14sp"
             tools:text="chat title"
             android:maxLines="1"
@@ -37,7 +38,7 @@
             android:layout_marginRight="@dimen/spacing_tiny_4"
             android:layout_toRightOf="@+id/iv_avatar_group"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/color_primary"
+            android:textColor="@color/color_title_single"
             android:textSize="14sp"
             tools:text="John Doe"
         tools:visibility="gone"
@@ -52,7 +53,7 @@
             android:layout_toRightOf="@+id/tv_message_autor"
             android:layout_toLeftOf="@+id/tv_counter_group"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/color_primary"
+            android:textColor="@color/color_message_single"
             android:textSize="14sp"
             tools:text="John Doe" />
 
@@ -63,7 +64,7 @@
             android:textSize="10sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:textColor="@color/color_gray_dark"
+            android:textColor="@color/color_tv_date_txt"
             tools:text="18:00"/>
     <TextView
             android:id="@+id/tv_counter_group"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_size"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +13,8 @@
         android:layout_height="@dimen/avatar_item_size"
         android:layout_alignParentLeft="true"
         android:src="@drawable/ic_archive_black_24dp"
-        android:background="@color/color_gray_light"/>
+        android:background="@drawable/bg_icon_archive"
+        android:padding="6dp"/>
     <View
         android:id="@+id/sv_indicator"
         android:layout_width="12dp"
@@ -69,7 +71,7 @@
         android:textSize="10sp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:textColor="@color/color_gray_dark"
+        android:textColor="@color/color_tv_date_txt"
         tools:text="18:00"/>
     <TextView
         android:id="@+id/tv_counter_archive"

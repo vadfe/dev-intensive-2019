@@ -13,10 +13,14 @@
     <color name="color_divider_light">#1FFFFFFF</color>
     <color name="color_indicator">#581F99</color>
     <color name="color_green">#4FD149</color>
-    <color name="color_white">#FFFFFF</color>
 
     <color name="color_title_single">#FFFFFF</color>
     <color name="color_message_single">#9CA9BA</color>
     <color name="color_app_bar_bg">#272727</color>
     <color name="color_item_chat_bg">#1D1D1D</color>
+    <color name="color_tv_counter_bg">#675F7F</color>
+    <color name="color_tv_date_txt">#9CA9BA</color>
+    <color name="color_swipe_fone">#2196F3</color>
+    <color name="color_wr_icon_fone">#675F7F</color>
+    <color name="color_chip_bg">#1D1D1D</color>
 </resources>
